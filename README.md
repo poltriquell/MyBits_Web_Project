@@ -15,7 +15,7 @@ This project contains the backend for the MapYou App that was used in the Comput
 
 * Àlex Codina Braceros
 * Mario Fernández Rodríguez
-* Adrian Sanz Fernández
+* Adrián Sanz Fernández
 * Enric Tobeña Casanovas
 * Pol Triquell Lombardo
 
