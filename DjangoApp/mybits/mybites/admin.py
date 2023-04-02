@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+admin.register(Restaurant)
+admin.register(Localization)
+admin.register(Meal)
+admin.register(Client)
+admin.register(Reservation)
+admin.register(Order)
+admin.register(Menu)
