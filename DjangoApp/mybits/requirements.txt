@@ -2,5 +2,5 @@
 django==4.1.5
 gunicorn==20.1.0
 click
-psycopg2
+psycopg2-binary
 whitenoise
