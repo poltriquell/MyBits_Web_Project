@@ -25,19 +25,19 @@ SECRET_KEY = "django-insecure-k+ke82km8#!-izz+@_z$e(q#sp3l((r6q@3oqxva=1um^u$3b0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost","postgres"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'mybites',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
 ]
 
 MIDDLEWARE = [
@@ -79,7 +79,7 @@ WSGI_APPLICATION = "mybits.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'digipm',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
