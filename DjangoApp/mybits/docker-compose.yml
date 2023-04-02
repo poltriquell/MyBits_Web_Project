@@ -8,7 +8,15 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8000:8000
+    
   db:
-    image: postgres
+    image: "postgres"
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: postgres
+      - POSTGRES_DB=digipm
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
