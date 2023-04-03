@@ -1,5 +1,5 @@
-# MapYou_Web_Project
-This project contains the backend for the MapYou App that was used in the Computer Science Engineering at Universitat de Lleida (UdL).
+# MyBits_Web_Project
+This project contains the backend for the MyBits App that was used in the Computer Science Engineering at Universitat de Lleida (UdL).
 
 ## Built With
 
@@ -11,13 +11,20 @@ This project contains the backend for the MapYou App that was used in the Comput
 * [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) - For more crispy forms.
 * [Bootstrap 4](https://getbootstrap.com/) - A pretty css.
 
+## How to run the web application
+
+## Teachers
+The teachers who have guided this project are:
+- [Carles Mateu](https://github.com/carlesm)
+- [Roberto Garcia](https://github.com/rogargon)
+
 ## Authors
 
-* Àlex Codina Braceros
-* Mario Fernández Rodríguez
-* Adrián Sanz Fernández
-* Enric Tobeña Casanovas
-* Pol Triquell Lombardo
+* [Àlex Codina Braceros](https://github.com/Codinab)
+* [Mario Fernández Rodríguez](https://github.com/marioferro2002)
+* [Adrián Sanz Fernández](https://github.com/adriansanzzzz)
+* [Enric Tobeña Casanovas](https://github.com/Enric-Tobena)
+* [Pol Triquell Lombardo](https://github.com/poltriquell)
 
 ## License
 
