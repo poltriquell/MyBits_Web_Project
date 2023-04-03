@@ -1,19 +1,35 @@
 version: '3.4'
 
 services:
-  djangoapp:
-    image: djangoapp
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - 8000:8000
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=mydatabase
+      - DB_USER=mydatabaseuser
+      - DB_PASSWORD=mypassword
+
 
   db:
-    image: postgres:11.1
+    image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_DB: your_database_name
+      POSTGRES_USER: your_database_user
+      POSTGRES_PASSWORD: your_database_password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
     ports:
-      - 5432:5432
+      - "5432:5432"
+    networks:
+      - mybits-network
+
+volumes:
+  postgres-data:
+
+networks:
+  mybits-network:
