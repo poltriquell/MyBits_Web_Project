@@ -12,6 +12,9 @@ This project contains the backend for the MyBits App that was used in the Comput
 * [Bootstrap 4](https://getbootstrap.com/) - A pretty css.
 
 ## How to run the web application with Docker
+If you have an application that you want to run, one way to do it is with Docker. Docker is a tool that allows you to package your application and all its dependencies into a container, which can then be run on any system that has Docker installed.
+
+Here are the steps to follow to run an application with Docker:
 
 ### Step 1: Install Docker
 The first step is to install Docker on your system. Docker is available for Windows, macOS, and Linux, so make sure you download the appropriate version for your operating system. You can download Docker from the official website:
@@ -79,6 +82,17 @@ The **_docker-compose up_** command will build the Docker image if it doesn't al
 Once the containers are running, you can access the application by opening a web browser and navigating to **_http://localhost:8000_**. You should see your Python application running in the browser.
 
 That's it! You've successfully run your Python application as a Docker container orchestration using docker-compose.
+
+## How to run the web application in Fly.io
+
+### Prerequisites
+
+Before you begin, make sure you have the following:
+
+- A Fly.io account. If you don't have one yet, you can sign up for a free account at https://fly.io/signup/.
+- An application that you want to deploy.
+
+### Step 1: Create a New App
 
 ## Teachers
 The teachers who have guided this project are:
