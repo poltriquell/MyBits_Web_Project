@@ -1,15 +1,14 @@
 # MyBits_Web_Project
-This project contains the backend for the MyBits App that was used in the Computer Science Engineering at Universitat de Lleida (UdL).
 
-## Built With
+## Introduction
+This project contains the backend for the MyBits App that was used in Web Project subject in [Computer Science Engineering](https://grauinformatica.udl.cat/en) at [Universitat de Lleida (UdL)](https://www.udl.cat/ca/en/).
 
-* [Django](https://www.djangoproject.com/) - The web framework used.
-* [Docker](https://www.docker.com/) - Container management.
-* [Heroku](https://www.heroku.com/) - Cloud Application Platform.
-* [PostgreSQL](https://www.postgresql.org/) - Open Source Database.
-* [Travis](https://travis-ci.org/) - Test CI.
-* [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) - For more crispy forms.
-* [Bootstrap 4](https://getbootstrap.com/) - A pretty css.
+## Project Idea
+Our proposed project is a web-based application that enables registered users to showcase their restaurants and allows other users to review them. In essence, it is a platform that connects restaurant owners with potential customers.
+
+The primary goal of our project is to develop a comprehensive understanding of how web-based applications work, specifically those that relate to the food industry.
+
+To put it simply, our plan is to create a website where restaurant owners can register and promote their businesses, while users can share their reviews and experiences. This project will help us learn how to develop web applications that cater to the food industry.
 
 ## How to run the web application with Docker
 If you have an application that you want to run, one way to do it is with Docker. Docker is a tool that allows you to package your application and all its dependencies into a container, which can then be run on any system that has Docker installed.
@@ -93,6 +92,16 @@ Before you begin, make sure you have the following:
 - An application that you want to deploy.
 
 ### Step 1: Create a New App
+
+## Built With
+
+* [Django](https://www.djangoproject.com/) - The web framework used.
+* [Docker](https://www.docker.com/) - Container management.
+* [Fly.io](https://fly.io/) - Cloud Application Platform.
+* [PostgreSQL](https://www.postgresql.org/) - Open Source Database.
+* [Travis](https://travis-ci.org/) - Test CI.
+* [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/) - For more crispy forms.
+* [Bootstrap 4](https://getbootstrap.com/) - A pretty css.
 
 ## Teachers
 The teachers who have guided this project are:
