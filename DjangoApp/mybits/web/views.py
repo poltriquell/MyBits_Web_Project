@@ -6,4 +6,15 @@ from django.http import HttpResponse
 def home(request):
     return HttpResponse("Hello, world. You're at the home.")
 
+def sign_in(request):
+    return HttpResponse("Hello, world. You're at the authentication.")
+
+def profile(request):
+    return HttpResponse("Hello, world. You're at the profile.")
+
+def edit_profile(request):
+    return HttpResponse("Hello, world. You're at the editing menu.")
+
+
+
 
