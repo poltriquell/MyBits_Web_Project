@@ -78,20 +78,39 @@ docker-compose up
 The **_docker-compose up_** command will build the Docker image if it doesn't already exist, and then start the container.
 
 ### Step 5: Access the application
-Once the containers are running, you can access the application by opening a web browser and navigating to **_http://localhost:8000_**. You should see your Python application running in the browser.
+Once the containers are running, you can access the application by opening a web browser and navigating to **_https://localhost:8000_**. You should see your Python application running in the browser.
 
 That's it! You've successfully run your Python application as a Docker container orchestration using docker-compose.
 
 ## How to run the web application in Fly.io
 
-### Prerequisites
+### Step 1: Sign up for a Fly.io Account
+Before you start, make sure you have signed up for an account on Fly.io.
 
-Before you begin, make sure you have the following:
+### Step 2: Install the Flyctl CLI Tool
 
-- A Fly.io account. If you don't have one yet, you can sign up for a free account at https://fly.io/signup/.
-- An application that you want to deploy.
+You'll need the Flyctl CLI tool to deploy your application. Install it on your local machine by following the instructions provided on the Fly.io website.
 
-### Step 1: Create a New App
+### Step 3: Create a New Fly.io Application
+Create a new Fly.io application using the Flyctl CLI tool. You can do this by running the following command in your terminal:
+```
+flyctl apps create <APP-NAME>
+```
+Replace **_<APP-NAME>_** with a name of your choice.
+
+### Step 4: Navigate to Your Docker Compose File
+Navigate to the directory where your **_docker-compose.yml_** file is located.
+
+### Step 5: Deploy Your Application
+Use the Flyctl CLI tool to configure your Fly.io application to use your Docker Compose file. You can do this by running the following command:
+```
+flyctl deploy
+```
+
+### Step 6: Access Your Application
+Once the deployment is complete, you can access your application by using the URL provided by Fly.io. Open your web browser and enter the URL to view your application.
+
+That's it! You have now successfully deployed your Docker Compose application to Fly.io.
 
 ## Built With
 
