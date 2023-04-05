@@ -23,9 +23,9 @@ import web.views as wb
 urlpatterns = [
     path('', wb.home, name='Home'),
     path('Restaurant/', include('mybits.urls')),
-    path('SignIn/', wb.sign_in, name='SignIn / Register'),
+    path('SignIn/', wb.sign_in, name='SignIn_Register'),
     path('profile/', wb.profile, name='Profile'),
-    path('profile/edit/', wb.edit_profile, name='Edit Profile'),    
+    path('profile/edit/', wb.edit_profile, name='Edit_Profile'),    
     path('admin/', admin.site.urls),
 ]
 

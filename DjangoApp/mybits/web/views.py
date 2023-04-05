@@ -44,3 +44,5 @@ def reservation_details(request):
     return HttpResponse("Reservation details")
 
 #Dishes
+def dishes_list(request):
+    return HttpResponse("Dishes list")
