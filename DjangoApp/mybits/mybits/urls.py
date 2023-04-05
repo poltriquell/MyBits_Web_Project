@@ -17,6 +17,25 @@ from django.contrib import admin
 from django.urls import path
 import web.views as wb
 
-urlpatterns = [ path('admin/', admin.site.urls), path('',wb.home, name='Home')]
+urlpatterns = [
+    path('',wb.home, name='Home'),
+    path('admin/', admin.site.urls),
+]
 # path('search/', search_bar, name='content_search'),
 # Quan un usuari visiti la funcio de busqueda (lupa), llavors s'executara la funció search_bar, que estara dintre de views.py
+
+urlpatterns = [
+    path('', home, name='home'),
+    path('Teatre/', include('Teatre.urls')),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),  # User authentication
+    path('SignIn/', SignIn, name='register'),
+    path('profile/', profile, name='profile'),
+    path('profile/edit/', edit_profile, name='edit_profile'),
+
+    path('accounts/delete/', delete_user, name='delete_user'),
+    path('usermanage/', user_management, name='user_management'),
+]
+from django.conf.urls.static import static
+from django.conf import settings
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
