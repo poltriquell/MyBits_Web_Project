@@ -30,7 +30,7 @@ def edit_restaurant(request):
 def restaurant_description(request):
     return HttpResponse("Hello, world. You're at the restaurant's description.")
  
- #Reservations
+#Reservations
 def reservations_list(request):
     return HttpResponse("Reservations list")
 
@@ -42,3 +42,5 @@ def book(request):
 
 def reservation_details(request):
     return HttpResponse("Reservation details")
+
+#Dishes

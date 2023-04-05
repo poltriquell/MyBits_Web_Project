@@ -28,6 +28,7 @@ urlpatterns = [
     path('profile/edit/', wb.edit_profile, name='Edit Profile'),    
     path('admin/', admin.site.urls),
 ]
+
 # path('search/', search_bar, name='content_search'),
 # Quan un usuari visiti la funcio de busqueda (lupa), llavors s'executara la funció search_bar, que estara dintre de views.py
 
