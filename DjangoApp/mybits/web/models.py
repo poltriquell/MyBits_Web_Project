@@ -10,7 +10,6 @@ class Restaurant(models.Model):
     website = models.CharField(max_length=50)
     id_localization = models.ForeignKey('Localization', on_delete=models.CASCADE)
 
-
 class Localization(models.Model):
     id_localization = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)

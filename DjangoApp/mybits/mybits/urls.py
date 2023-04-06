@@ -14,9 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import *
+from django.conf.urls.static import static
+from django.conf import settings
+
 import web.views as wb
 
-urlpatterns = [ path('admin/', admin.site.urls), path('',wb.home, name='Home')]
+urlpatterns = [
+    path('', wb.home, name='Home'),
+    path('restaurant/', wb.restaurant_list, name='restaurant-list'),
+    path('restaurant/<int:pk>/', wb.restaurant_detail, name='restaurant-detail'),
+    path('localization/', wb.localization_list, name='localization-list'),
+    path('localization/<int:pk>/', wb.localization_detail, name='localization-detail'),
+    path('meal/', wb.meal_list, name='meal-list'),
+    path('meal/<int:pk>/', wb.meal_detail, name='meal-detail'),
+    path('client/', wb.client_list, name='client-list'),
+    path('client/<int:pk>/', wb.client_detail, name='client-detail'),
+    path('reservation/', wb.reservation_list, name='reservation-list'),
+    path('reservation/<int:pk>/', wb.reservation_detail, name='reservation-detail'),
+    path('order/', wb.order_list, name='order-list'),
+    path('order/<int:pk>/', wb.order_detail, name='order-detail'),
+    path('menu/', wb.menu_list, name='menu-list'),
+    path('menu/<int:pk>/', wb.menu_detail, name='menu-detail'),   
+    path('admin/', admin.site.urls),
+]
+
 # path('search/', search_bar, name='content_search'),
 # Quan un usuari visiti la funcio de busqueda (lupa), llavors s'executara la funció search_bar, que estara dintre de views.py
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
