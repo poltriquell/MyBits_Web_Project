@@ -61,6 +61,9 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
+# Environment variables
+.env
+
 # StyleCop
 StyleCopReport.xml
 
