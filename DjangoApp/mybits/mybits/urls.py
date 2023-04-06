@@ -23,7 +23,7 @@ import web.views as wb
 urlpatterns = [
     path('', wb.home, name='Home'),
     path('restaurant/', wb.restaurant_list, name='restaurant-list'),
-    path('restaurant/<int:pk>/', wb.restaurant_detail, name='restaurant-detail'),
+    path('restaurant/<int:id_rest>/', wb.restaurant_detail, name='restaurant-detail'),
     path('localization/', wb.localization_list, name='localization-list'),
     path('localization/<int:pk>/', wb.localization_detail, name='localization-detail'),
     path('meal/', wb.meal_list, name='meal-list'),
