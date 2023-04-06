@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Localizations List</title>
+</head>
+<body>
+	<h1>Localizations List</h1>
+	{% if localizations %}
+		{% for localization in localizations %}
+			<div>
+				<h2>{{ localization.name }} {{ localization.address }}</h2>
+			</div>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>No registered locations in the database.</p>
+	{% endif %}
+</body>
+</html>

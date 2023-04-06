@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clients List</title>
+</head>
+<body>
+	<h1>Clients List</h1>
+	{% if clients %}
+		{% for client in clients %}
+			<div>
+				<h2>{{ client.name }}</h2>
+			</div>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>No registered clients in the database.</p>
+	{% endif %}
+</body>
+</html>

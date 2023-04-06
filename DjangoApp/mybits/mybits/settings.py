@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 import os
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = "django-insecure-k+ke82km8#!-izz+@_z$e(q#sp3l((r6q@3oqxva=1um^u$3b0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,11 +77,11 @@ WSGI_APPLICATION = "mybits.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['DB'],
-        'USER': os.environ['USER'],
-        'PASSWORD': os.environ['PASSWORD'],
-        'HOST': os.environ['HOST'],
-        'PORT': os.environ['PORT'],
+        'NAME': "mydatabase",
+        'USER': "mydatabaseuser",
+        'PASSWORD': "mypassword",
+        'HOST': "db",
+        'PORT': "5432",
     }
 }
 
