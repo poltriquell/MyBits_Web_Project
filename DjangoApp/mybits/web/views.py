@@ -10,9 +10,9 @@ def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
     return render(request, 'web/restaurant.html', {"restaurants" : all_restaurants})
 
-def restaurant_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " description.")
+def restaurant_detail(request, id_rest):
+    one_restaurant = Restaurant.objects.get(pk=id_rest)
+    return render(request, 'web/restaurant.html', {"restaurant" : one_restaurant})
 
 def localization_list(request):
     return HttpResponse("Hello, world. You're at localization list.")
