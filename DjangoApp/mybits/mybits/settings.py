@@ -17,14 +17,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from django.core.management.utils import get_random_secret_key
-SECRET_KEY = "pfrkmgvr[+++[]o··]"
 
+SECRET_KEY = "django-insecure-k+ke82km8#!-izz+@_z$e(q#sp3l((r6q@3oqxva=1um^u$3b0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost","postgres"]
 
 
 # Application definition
