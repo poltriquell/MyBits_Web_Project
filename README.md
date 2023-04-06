@@ -58,6 +58,8 @@ services:
       - 8000:8000
     depends_on:
       - db
+    env_file:
+      - key.env
       
   nginx:
     image: nginx
