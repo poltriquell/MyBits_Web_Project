@@ -1,58 +1,14 @@
+<!DOCTYPE html>
 <html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Restaurante XYZ</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Menú</a></li>
-        <li><a href="#">Reservas</a></li>
-        <li><a href="#">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1>Restaurante XYZ</h1>
-      <p>Disfruta de la mejor comida en nuestro restaurante</p>
-      <a href="#" class="button">Reserva ahora</a>
-    </section>
-
-    <section class="featured-dishes">
-      <h2>Platos destacados</h2>
-      <ul>
-        <li>
-          <img src="dish1.jpg" alt="Plato 1">
-          <h3>Nombre del plato 1</h3>
-          <p>Descripción del plato 1</p>
-        </li>
-        <li>
-          <img src="dish2.jpg" alt="Plato 2">
-          <h3>Nombre del plato 2</h3>
-          <p>Descripción del plato 2</p>
-        </li>
-        <li>
-          <img src="dish3.jpg" alt="Plato 3">
-          <h3>Nombre del plato 3</h3>
-          <p>Descripción del plato 3</p>
-        </li>
-      </ul>
-    </section>
-
-    <section class="about">
-      <h2>Sobre nosotros</h2>
-      <p>Somos un restaurante familiar que ofrece una amplia variedad de platos deliciosos preparados con ingredientes frescos y de calidad. Nos esforzamos por ofrecer un ambiente acogedor y un servicio excepcional a todos nuestros clientes.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>Restaurante XYZ &copy; 2023</p>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ restaurant.name }}</title>
+  </head>
+  <body>
+    <h1>{{ restaurant.name }}</h1>
+    <p>Phone: {{ restaurant.phone }}</p>
+    <p>Email: {{ restaurant.email }}</p>
+    <p>Website: {{ restaurant.website }}</p>
+    <p>Location: {{ restaurant.id_localization }}</p>
+  </body>
 </html>
