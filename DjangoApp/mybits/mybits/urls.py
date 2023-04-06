@@ -22,10 +22,20 @@ import web.views as wb
 
 urlpatterns = [
     path('', wb.home, name='Home'),
-    path('Restaurant/', include('mybits.urls')),
-    path('SignIn/', wb.sign_in, name='SignIn_Register'),
-    path('profile/', wb.profile, name='Profile'),
-    path('profile/edit/', wb.edit_profile, name='Edit_Profile'),    
+    path('restaurant/', wb.restaurant_list, name='restaurant-list'),
+    path('restaurant/<int:pk>/', wb.restaurant_detail, name='restaurant-detail'),
+    path('localization/', wb.localization_list, name='localization-list'),
+    path('localization/<int:pk>/', wb.localization_detail, name='localization-detail'),
+    path('meal/', wb.meal_list, name='meal-list'),
+    path('meal/<int:pk>/', wb.meal_detail, name='meal-detail'),
+    path('client/', wb.client_list, name='client-list'),
+    path('client/<int:pk>/', wb.client_detail, name='client-detail'),
+    path('reservation/', wb.reservation_list, name='reservation-list'),
+    path('reservation/<int:pk>/', wb.reservation_detail, name='reservation-detail'),
+    path('order/', wb.order_list, name='order-list'),
+    path('order/<int:pk>/', wb.order_detail, name='order-detail'),
+    path('menu/', wb.menu_list, name='menu-list'),
+    path('menu/<int:pk>/', wb.menu_detail, name='menu-detail'),   
     path('admin/', admin.site.urls),
 ]
 

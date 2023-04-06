@@ -1,48 +1,56 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
+from .models import Restaurant, Localization, Meal, Client, Reservation, Order, Menu
 
-# Create your views here.
 def home(request):
     return HttpResponse("Hello, world. You're at the home.")
 
-def sign_in(request):
-    return HttpResponse("Hello, world. You're at the authentication.")
+def restaurant_list(request):
+    return HttpResponse("Hello, world. You're at restaurant list.")
 
-def profile(request):
-    return HttpResponse("Hello, world. You're at the profile.")
+def restaurant_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " description.")
 
-def edit_profile(request):
-    return HttpResponse("Hello, world. You're at the editing menu.")
+def localization_list(request):
+    return HttpResponse("Hello, world. You're at localization list.")
 
-#Restaurants
-def restaurants_list(request):
-    return HttpResponse("Hello, world. You're at the restaurants list.")
+def localization_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " localization detail.")
 
-def add_restaurant(request):
-    return HttpResponse("Hello, world. You're at the add menu.")
-    
-def delete_restaurant(request):
-    return HttpResponse("Hello, world. You're at the delete menu.")
-    
-def edit_restaurant(request):
-    return HttpResponse("Hello, world. You're at the edition menu.")
-    
-def restaurant_description(request):
-    return HttpResponse("Hello, world. You're at the restaurant's description.")
- 
-#Reservations
-def reservations_list(request):
-    return HttpResponse("Reservations list")
+def meal_list(request):
+    return HttpResponse("Hello, world. You're at meal list.")
 
-def select_reservation(request):
-    return HttpResponse("Select reservation")
+def meal_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " meal detail.")
 
-def book(request):
-    return HttpResponse("Book")
+def client_list(request):
+    return HttpResponse("Hello, world. You're at client list.")
 
-def reservation_details(request):
-    return HttpResponse("Reservation details")
+def client_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at client detail " + pk_str + " description.")
 
-#Dishes
-def dishes_list(request):
-    return HttpResponse("Dishes list")
+def reservation_list(request):
+    return HttpResponse("Hello, world. You're at reservation list.")
+
+def reservation_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " reservation detail.")
+
+def order_list(request):
+    return HttpResponse("Hello, world. You're at order list.")
+
+def order_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " order detail.")
+
+def menu_list(request):
+    return HttpResponse("Hello, world. You're at menu list.")
+
+def menu_detail(request, pk):
+    pk_str = str(pk)
+    return HttpResponse("Hello, world. You're at restaurant " + pk_str + "menu detail.")
