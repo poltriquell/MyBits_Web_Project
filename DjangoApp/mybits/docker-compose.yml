@@ -16,9 +16,8 @@ services:
       - 8000:8000
     depends_on:
       - db
-    environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - DATABASE_URL="postgresql://mydatabaseuser:mypassword@db:5432/mydatabase"
+    env_file:
+      - key.env
         
       
   nginx:
