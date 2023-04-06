@@ -9,6 +9,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
+# Install environt variables
+COPY key.env /app/
+ENV SECRET_KEY=$SECRET_KEY
+ENV DATABASE_URL=$DATABASE_URL
+
+
 # Install pip requirements
 COPY requirements.txt .
 RUN python3 -m pip install -r requirements.txt

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reservations List</title>
+</head>
+<body>
+	<h1>Reservations List</h1>
+	{% if reservations %}
+		{% for reservation in reservations %}
+			<div>
+				<h2>Reservation {{ reservation.id_reservation }}</h2>
+				<p><strong>Date:</strong> {{ reservation.date }}</p>
+				<p><strong>Num. people:</strong> {{ reservation.people_num }}</p>
+				<p><strong>Client:</strong> {{ reservation.id_client.name }}</p>
+				<p><strong>Restaurant:</strong> {{ reservation.id_restaurant.name }}</p>
+                <p></p>
+			</div>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>No reservations registered in the database.</p>
+	{% endif %}
+</body>
+</html>

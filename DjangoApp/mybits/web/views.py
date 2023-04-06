@@ -19,7 +19,7 @@ def restaurant_detail(request, id_rest):
 def localization_list(request):
     all_localizations = Localization.objects.all()
     return render(request, 'web/localizations.html', {"localizations" : all_localizations})
-                   
+
 def localization_detail(request, id_loc):
     one_localization = Localization.objects.get(pk=id_loc)
     return render(request, 'web/localization.html', {"localization" : one_localization})

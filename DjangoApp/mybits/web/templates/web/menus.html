@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Menus List</title>
+  </head>
+  <body>
+    <h1>Menus List</h1>
+    {% if menus %}
+      <ul>
+        {% for menu in menus %}
+          <li>
+            <h2>{{ menu.id }}</h2>
+            <p><strong>Restaurant:</strong> {{ menu.id_restaurant.name }}</p>
+            <p><strong>Price:</strong> {{ menu.price }}</p>
+            <p><strong>Description:</strong> {{ menu.description }}</p>
+            <p><strong>Type:</strong> {{ menu.type }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No menus available.</p>
+    {% endif %}
+  </body>
+</html>

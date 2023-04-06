@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Orders List</title>
+</head>
+<body>
+	<h1>Orders List</h1>
+	{% if orders %}
+		{% for order in orders %}
+			<div>
+				<p><strong>Fecha:</strong> {{ order.data }}</p>
+				<p><strong>Precio total:</strong> {{ order.total_price }}</p>
+				<p><strong>Cliente:</strong> {{ order.id_client.name }}</p>
+				<p><strong>Restaurante:</strong> {{ order.id_restaurant.name }}</p>
+                <p></p>
+			</div>
+			<hr>
+		{% endfor %}
+	{% else %}
+		<p>No orders registered in the database.</p>
+	{% endif %}
+</body>
+</html>
