@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.views.generic import ListView, DetailView
-from .models import Restaurant, Localization, Meal, Client, Reservation, Order, Menu
+from .models import Restaurant, Localization, Client, Reservation, Order, Menu
 
 def home(request):
     return render(request, 'web/home.html', None)
