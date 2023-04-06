@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restaurants List</title>
+</head>
+<body>
+	<h1>Restaurants List</h1>
+	{% if restaurants %}
+		<ul>
+		{% for restaurant in restaurants %}
+			<li>{{ restaurant.name }}</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>No registered restaurants</p>
+	{% endif %}
+</body>
+</html>
