@@ -4,10 +4,11 @@ from django.views.generic import ListView, DetailView
 from .models import Restaurant, Localization, Meal, Client, Reservation, Order, Menu
 
 def home(request):
-    return HttpResponse("Hello, world. You're at the home.")
+    return render(request, 'web/home.html', None)
 
 def restaurant_list(request):
-    return HttpResponse("Hello, world. You're at restaurant list.")
+    all_restaurants = Restaurant.objects.all()
+    return render(request, 'web/restaurant.html', {"restaurants" : all_restaurants})
 
 def restaurant_detail(request, pk):
     pk_str = str(pk)
