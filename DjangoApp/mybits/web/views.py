@@ -1,57 +1,61 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic import ListView, DetailView
 from .models import Restaurant, Localization, Meal, Client, Reservation, Order, Menu
 
 def home(request):
     return render(request, 'web/home.html', None)
 
+#Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
-    return render(request, 'web/restaurant.html', {"restaurants" : all_restaurants})
+    return render(request, 'web/restaurants.html', {"restaurants" : all_restaurants})
 
 def restaurant_detail(request, id_rest):
     one_restaurant = Restaurant.objects.get(pk=id_rest)
     return render(request, 'web/restaurant.html', {"restaurant" : one_restaurant})
 
+#Localizations
 def localization_list(request):
-    return HttpResponse("Hello, world. You're at localization list.")
+    all_localizations = Localization.objects.all()
+    return render(request, 'web/localizations.html', {"localizations" : all_localizations})
+                   
+def localization_detail(request, id_loc):
+    one_localization = Localization.objects.get(pk=id_loc)
+    return render(request, 'web/localization.html', {"localization" : one_localization})
 
-def localization_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " localization detail.")
-
-def meal_list(request):
-    return HttpResponse("Hello, world. You're at meal list.")
-
-def meal_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " meal detail.")
-
+#Clients
 def client_list(request):
-    return HttpResponse("Hello, world. You're at client list.")
+    all_clients = Client.objects.all()
+    return render(request, 'web/clients.html', {"clients" : all_clients})
 
-def client_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at client detail " + pk_str + " description.")
+def client_detail(request, id_client):
+    one_client = Client.objects.get(pk=id_client)
+    return render(request, 'web/client.html', {"client" : one_client})
 
+#Reservations
 def reservation_list(request):
-    return HttpResponse("Hello, world. You're at reservation list.")
+    all_reservations = Reservation.objects.all()
+    return render(request, 'web/reservations.html', {"reservations" : all_reservations})   
 
-def reservation_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " reservation detail.")
+def reservation_detail(request, id_book):
+    one_reservation = Reservation.objects.get(pk=id_book)
+    return render(request, 'web/reservation.html', {"reservation" : one_reservation})
 
+#Orders
 def order_list(request):
-    return HttpResponse("Hello, world. You're at order list.")
+    all_orders = Order.objects.all()
+    return render(request, 'web/orders.html', {"orders" : all_orders})  
 
-def order_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + " order detail.")
+def order_detail(request, id_order):
+    one_order = Order.objects.get(pk=id_order)
+    return render(request, 'web/order.html', {"order" : one_order})
 
+#Menus
 def menu_list(request):
-    return HttpResponse("Hello, world. You're at menu list.")
+    all_menus = Menu.objects.all()
+    return render(request, 'web/menus.html', {"menus" : all_menus})  
 
-def menu_detail(request, pk):
-    pk_str = str(pk)
-    return HttpResponse("Hello, world. You're at restaurant " + pk_str + "menu detail.")
+def menu_detail(request, id_rest):
+    one_menu = Menu.objects.get(pk=id_rest)
+    return render(request, 'web/menu.html', {"menus" : one_menu})
