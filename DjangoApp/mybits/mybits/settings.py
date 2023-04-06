@@ -13,12 +13,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import dotenv
+dotenv.load_dotenv()
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-import os
-SECRET_KEY = "django-insecure-k+ke82km8#!-izz+@_z$e(q#sp3l((r6q@3oqxva=1um^u$3b0"
+import os, dj_database_url
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "web",    
+    "web",
 ]
 
 MIDDLEWARE = [
@@ -47,7 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    
+
 ]
 
 ROOT_URLCONF = "mybits.urls"
@@ -75,15 +78,10 @@ WSGI_APPLICATION = "mybits.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "mydatabase",
-        'USER': "mydatabaseuser",
-        'PASSWORD': "mypassword",
-        'HOST': "db",
-        'PORT': "5432",
-    }
+    'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
 }
+
+
 
 
 
