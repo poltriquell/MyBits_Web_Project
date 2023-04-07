@@ -22,18 +22,26 @@ import web.views as wb
 
 urlpatterns = [
     path('', wb.home, name='Home'),
+    
     path('restaurant/', wb.restaurant_list, name='restaurant-list'),
     path('restaurant/<int:id_rest>/', wb.restaurant_detail, name='restaurant-detail'),
+    
     path('localization/', wb.localization_list, name='localization-list'),
     path('localization/<int:id_loc>/', wb.localization_detail, name='localization-detail'),
+    
     path('client/', wb.client_list, name='client-list'),
     path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
+    
     path('reservation/', wb.reservation_list, name='reservation-list'),
     path('reservation/<int:id_book>/', wb.reservation_detail, name='reservation-detail'),
+    
     path('order/', wb.order_list, name='order-list'),
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
+    
     path('menu/', wb.menu_list, name='menu-list'),
-    path('menu/<int:id_menu>/', wb.menu_detail, name='menu-detail'),   
+    path('menu/<int:id_menu>/', wb.menu_detail, name='menu-detail'),  
+    
+    path('login/', wb.login, name='login-menu'),  
     path('admin/', admin.site.urls),
 ]
 

@@ -9,9 +9,14 @@
     object-fit: contain;
   }
 
+  section {
+    margin-top: 100px; /* ajusta la altura según tus necesidades */
+  }
+
   .navbar {
     background-color: #fff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
   }
 
   .navbar-brand img {
