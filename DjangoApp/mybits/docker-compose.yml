@@ -3,10 +3,8 @@ version: '3.4'
 services:
   db:
     image: postgres
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: mydatabaseuser
-      POSTGRES_PASSWORD: mypassword
+    env_file:
+      - key.env
     # volumes:
     # - db-data:/var/lib/postgresql/data"""
   djangoapp:
