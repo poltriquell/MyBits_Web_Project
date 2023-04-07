@@ -23,3 +23,25 @@ $(document).ready(function() {
       }
     });
   });
+
+// Get the form element
+var form = document.querySelector('.form-signin');
+
+// Add event listener for form submission
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the form from submitting
+
+  // Get the email and password values
+  var email = document.getElementById('inputEmail').value;
+  var password = document.getElementById('inputPassword').value;
+
+  // Check if the email and password are valid
+  if (email === 'user@example.com' && password === 'password') {
+    // Display a success message
+    alert('Login successful!');
+  } else {
+    // Display an error message
+    alert('Invalid email or password. Please try again.');
+  }
+});
+

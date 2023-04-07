@@ -9,15 +9,20 @@
     object-fit: contain;
   }
 
+  section {
+    margin-top: 100px; /* ajusta la altura según tus necesidades */
+  }
+
   .navbar {
     background-color: #fff;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
   }
-  
+
   .navbar-brand img {
     height: 30px;
   }
-  
+
   .nav-link {
     color: #6c757d;
     font-size: 14px;
@@ -25,16 +30,84 @@
     margin-left: 20px;
     text-transform: uppercase;
   }
-  
+
   .nav-link:hover {
     color: #000;
   }
-  
+
   .active {
     color: #000;
   }
-  
+
   .navbar-nav {
     margin-left: auto;
+  }
+
+/* Custom CSS for The Fork login menu */
+
+/* Container styling */
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Form styling */
+  .form-signin {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form heading styling */
+  .form-signin .form-signin-heading {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #C00;
+  }
+  
+  /* Form input styling */
+  .form-signin label {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+  }
+  
+  .form-signin input[type="email"],
+  .form-signin input[type="password"] {
+    margin-bottom: 20px;
+  }
+  
+  .form-signin input[type="email"]:focus,
+  .form-signin input[type="password"]:focus {
+    border-color: #C00;
+    box-shadow: 0px 0px 10px rgba(204, 0, 0, 0.2);
+  }
+  
+  /* Remember me checkbox styling */
+  .form-signin .checkbox {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  
+  .form-signin .checkbox label {
+    color: #666;
+  }
+  
+  /* Sign in button styling */
+  .form-signin button[type="submit"] {
+    background-color: #C00;
+    border-color: #C00;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+  
+  .form-signin button[type="submit"]:hover {
+    background-color: #AF0000;
+    border-color: #AF0000;
   }
   

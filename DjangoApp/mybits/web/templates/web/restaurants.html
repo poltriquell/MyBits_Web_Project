@@ -9,6 +9,10 @@
 		<ul>
 		{% for restaurant in restaurants %}
 			<li>{{ restaurant.name }}</li>
+			<li>{{ restaurant.phone }}</li>
+			<li>{{ restaurant.email }}</li>
+			<li>{{ restaurant.website }}</li>
+			<li>{{ restaurant.id_localization.address }}, {{ restaurant.id_localization.name }}</li>
 		{% endfor %}
 		</ul>
 	{% else %}

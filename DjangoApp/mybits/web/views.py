@@ -4,7 +4,8 @@ from django.views.generic import ListView, DetailView
 from .models import Restaurant, Localization, Client, Reservation, Order, Menu
 
 def home(request):
-    return render(request, 'web/home.html', None)
+    all_restaurants = Restaurant.objects.all()
+    return render(request, 'web/home.html', {"restaurants" : all_restaurants})
 
 #Restaurants
 def restaurant_list(request):
@@ -59,3 +60,7 @@ def menu_list(request):
 def menu_detail(request, id_rest):
     one_menu = Menu.objects.get(pk=id_rest)
     return render(request, 'web/menu.html', {"menus" : one_menu})
+
+#Login
+def login(request):
+    return render(request, 'web/login.html', None)
