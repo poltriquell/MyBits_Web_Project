@@ -27,12 +27,16 @@ FROM python:3.10-slim
 EXPOSE 8000
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+COPY key.env /app/
+ENV SECRET_KEY=$SECRET_KEY
+ENV DATABASE_URL=$DATABASE_URL
 COPY requirements.txt .
 RUN python3 -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 RUN adduser -u 1000 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
+ENV SECRET_KEY=$SECRET_KEY
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 ```
 This Dockerfile uses Python as the base image, installs the dependencies listed in requirements.txt, copies the application code into the container, and specifies the command to run the application.
@@ -45,10 +49,10 @@ version: '3.4'
 services:
   db:
     image: postgres
-    environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: mydatabaseuser
-      POSTGRES_PASSWORD: mypassword
+    env_file:
+      - key.env
+    # volumes:
+    # - db-data:/var/lib/postgresql/data"""
   djangoapp:
     image: djangoapp
     build:
@@ -60,7 +64,7 @@ services:
       - db
     env_file:
       - key.env
-      
+
   nginx:
     image: nginx
     ports:
