@@ -21,7 +21,7 @@ services:
       - DB_PASSWORD=${PASSWORD}
       - DB_USER=${USER}
       - DB_NAME=${NAME}
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - DB_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}
     image: postgres
 
 
