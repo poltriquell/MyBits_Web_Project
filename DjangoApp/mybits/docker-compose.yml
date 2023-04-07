@@ -1,8 +1,14 @@
 version: '3.4'
 
-
-
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: mydatabaseuser
+      POSTGRES_PASSWORD: mypassword
+    # volumes:
+    # - db-data:/var/lib/postgresql/data"""
   djangoapp:
     image: djangoapp
     build:
@@ -14,16 +20,6 @@ services:
       - db
     env_file:
       - key.env
-  db:
-    env_file:
-      - key.env
-    environment:
-      - DB_PASSWORD=${PASSWORD}
-      - DB_USER=${USER}
-      - DB_NAME=${NAME}
-      - DB_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}
-    image: postgres
-
 
   nginx:
     image: nginx
@@ -33,3 +29,4 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - djangoapp
+
