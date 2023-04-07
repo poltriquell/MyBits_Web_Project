@@ -12,12 +12,7 @@ ENV PYTHONUNBUFFERED=1
 # Install environt variables
 COPY key.env /app/
 ENV SECRET_KEY=$SECRET_KEY
-ENV DB_NAME=$DB_NAME
-ENV DB_USER=$DB_USER
-ENV DB_PASSWORD=$DB_PASSWORD
 ENV DATABASE_URL=$DATABASE_URL
-ENV POSTGRES_HOST_AUTH_METHOD=$POSTGRES_HOST_AUTH_METHOD
-
 
 # Install pip requirements
 COPY requirements.txt .
@@ -31,6 +26,7 @@ COPY . /app
 RUN adduser -u 1000 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
+ENV SECRET_KEY=$SECRET_KEY
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # File wsgi.py was not found. Please enter the Python path to wsgi file.
