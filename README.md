@@ -83,7 +83,14 @@ docker-compose up
 ```
 The **_docker-compose up_** command will build the Docker image if it doesn't already exist, and then start the container.
 
-## Step 5: Access the application
+## Step 5: Make migrations
+Before entering the main page of the web application you must assure that you have run the two following commands in your Docker Django-app container:
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+## Step 6: Access the application
 Once the containers are running, you can access the application by opening a web browser and navigating to **_https://localhost:8000_**. You should see your Python application running in the browser.
 
 That's it! You've successfully run your Python application as a Docker container orchestration using docker-compose.
