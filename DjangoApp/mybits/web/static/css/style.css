@@ -9,7 +9,7 @@
     object-fit: contain;
   }
 
-  section {
+  .section {
     margin-top: 100px; /* ajusta la altura según tus necesidades */
   }
 

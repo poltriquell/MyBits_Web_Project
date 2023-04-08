@@ -5,13 +5,12 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNS15U6" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <title>Restaurantes cerca de ti</title>
-  
   <style>
-    .navbar {
-      z-index: 9999; /* Establece una posición z elevada para que la barra de navegación aparezca por encima de todo */
+    body {
+      margin-top: 80px;
     }
   </style>
+  <title>Restaurantes cerca de ti</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
@@ -68,6 +67,74 @@
   <footer>
     <p>Derechos de autor 2023 - Restaurantes cerca de ti</p>
   </footer>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <h1>Discover the best restaurants near you</h1>
+        <form>
+          <label for="location">Where</label>
+          <input type="text" id="location" placeholder="City or ZIP code">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="popular">
+      <div class="container">
+        <h2>Popular cities</h2>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?paris" alt="Paris">
+          <h3>Paris</h3>
+        </div>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?new-york" alt="New York">
+          <h3>New York</h3>
+        </div>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?tokyo" alt="Tokyo">
+          <h3>Tokyo</h3>
+        </div>
+      </div>
+    </section>
+    <p></p>
+    <section id="discover">
+      <div class="container">
+        <h2>Discover new restaurants</h2>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?restaurant" alt="Restaurant">
+          <h3>La Belle Epoque</h3>
+          <p>French cuisine</p>
+          <button>Book a table</button>
+        </div>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?dinner" alt="Dinner">
+          <h3>The Smokehouse</h3>
+          <p>American cuisine</p>
+          <button>Book a table</button>
+        </div>
+        <div class="card">
+          <img src="https://source.unsplash.com/800x600/?sushi" alt="Sushi">
+          <h3>Sushi Saito</h3>
+          <p>Japanese cuisine</p>
+          <button>Book a table</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="#">About us</a>
+        <a href="#">Terms and conditions</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p>&copy; 2023 TheFork. All rights reserved.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
 
