@@ -1,18 +1,124 @@
 <html lang="es"> 
+
 <head>
-  <meta charset="UTF-8">  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNS15U6" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin-top: 80px;
     }
   </style>
-  <title>Restaurantes cerca de ti</title>
+  <title>My Bits - Bootstrap Landing Page</title>
+  <!-- Boostrap Css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Style Css -->
+  <link rel="stylesheet" href="../../static/css/style.css">
 </head>
-<body>
+<!--
+    <head>
+      <meta charset="UTF-8">  
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNS15U6" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <style>
+        body {
+          margin-top: 80px;
+        }
+      </style>
+      <title>Restaurantes cerca de ti</title>
+    </head>
+-->
+
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white shadow py-3 sticky-top">
+      <div class="container">
+          <a class="navbar-brand" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >
+              <img src="../static/images/Qrispy_white.svg" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav mx-auto">
+
+                  <li class="nav-item">
+                      <a class="nav-link" href="#heroSlider"> Home </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#about"> About </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#menu"> Menu </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#features"> Features </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#team"> Team </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="reservation/"> Reservation </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#blog"> Blog </a>
+                  </li>
+
+              </ul>
+              <a href="#" class="btn btn-brand"> Order Online </a>
+          </div>
+      </div>
+  </nav>
+
+  <!-- Hero Slider -->
+  <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+          <div class="carousel-item text-center bg-cover vh-100 active slide-1">
+              <div class="container h-100 d-flex align-items-center justify-content-center">
+                  <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                          <h6 class="text-white"> WELCOME TO MY BITS</h6>
+                          <h1 class="display-1 my-3 fw-bold text-white"> Char-grilled and flavor-filled </h1>
+                          <a href="reservation/" class="btn btn-brand"> Reservation </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="carousel-item text-center bg-cover vh-100 slide-2">
+              <div class="container h-100 d-flex align-items-center justify-content-center">
+                  <div class="row justify-content-center">
+                      <div class="col-lg-8">
+                          <h6 class="text-white"> WELCOME TO MY BITS</h6>
+                          <h1 class="display-1 my-3 fw-bold text-white"> Fresh & Tasty Food </h1>
+                          <a href="reservation/" class="btn btn-brand"> Reservation </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden"> Previous </span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden"> Next </span>
+      </button>
+  </div>
+
+  <!--<body> 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -39,7 +145,7 @@
       </div>
     </div>
   </nav>
-
+  -->
   <header>
     <h1>Restaurantes cerca de ti</h1>
   </header>
@@ -63,10 +169,6 @@
       {% endif %}
     </section>
   </main>
-
-  <footer>
-    <p>Derechos de autor 2023 - Restaurantes cerca de ti</p>
-  </footer>
 
   <main>
     <section id="hero">
@@ -123,17 +225,55 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <nav>
-        <a href="#">About us</a>
-        <a href="#">Terms and conditions</a>
-        <a href="#">Privacy policy</a>
-        <a href="#">Contact</a>
-      </nav>
-      <p>&copy; 2023 TheFork. All rights reserved.</p>
+  <!-- footer -->
+  <footer class="bg-cover">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4">
+                    <img src="../static/images/Qrispy_white.svg" class="mb-4" alt="">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit architecto unde
+                        magnam.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="ri-facebook-circle-fill"></i></a>
+                        <a href="#"><i class="ri-instagram-fill"></i></a>
+                        <a href="#"><i class="ri-youtube-fill"></i></a>
+                        <a href="https://github.com/poltriquell/MyBits_Web_Project"><i class="ri-github-fill"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 ms-auto">
+                    <h6 class="text-white mb-4">CONTACTE</h6>
+                    <p class="mb-1">P:(34) 678 90 12 34</p>
+                    <p class="mb-1">E:mybits_web_project@mybits.es</p>
+                    <p class="mb-0">A: C/ Jaume II, 69, Aula 1.01 (Alcatel), 25001 Lleida</p>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="text-white mb-4">HORARIS</h6>
+                    <p class="mb-1">Dilluns-Divendres : 08:00 - 22:00</p>
+                    <p>Dissabte-Diumenge : 08:00 - 22:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row gy-3 justify-content-between">
+                <div class="col-auto">
+                    <p class="mb-0">Copyrights all rights reserved</p>
+                </div>
+                <div class="col-auto">
+                    <p class="mb-0">Designed For <a
+                            href="https://github.com/poltriquell/MyBits_Web_Project">Web Project Subject</a></p>
+                </div>
+            </div>
+        </div>
     </div>
   </footer>
+
+  <!-- Bootstrap Bundle Js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"></script>
 
 </body>
 </html>
