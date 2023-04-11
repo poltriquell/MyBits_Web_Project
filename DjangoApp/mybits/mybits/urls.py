@@ -43,6 +43,8 @@ urlpatterns = [
     
     path('login/', wb.login, name='login-menu'),  
     path('admin/', admin.site.urls),
+    
+    path('about_us/', wb.about, name='about-us'),
 ]
 
 # path('search/', search_bar, name='content_search'),
