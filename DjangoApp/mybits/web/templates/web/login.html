@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>The Fork Login Menu</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    margin-left: -15px;
+      }
+      .d-flex {
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <form class="form-signin">
         <h2 class="form-signin-heading">The Fork Login</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" class="form-control half-input" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control half-input" placeholder="Password" required>
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+      <div class="d-flex" style="margin-top: 20px;">
+        <button class="btn btn-lg btn-primary mr-auto">Log In</button>
+        <p class="ml-auto">Still don't have an account? <a href="#">Register</a></p>
+      </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
-    <p></p>
-    <p></p>
-    <p></p>
-    <div id="gif-container" style="text-align: center; display: flex; justify-content: center">
-        <img id="rick-astley" src="../static/images/rick-astly-rick-rolled.gif" alt="Rick Astley Never Gonna Give You Up">
-    </div>
   </body>
 </html>
