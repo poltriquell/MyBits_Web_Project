@@ -65,6 +65,9 @@ def menu_detail(request, id_rest):
 def login(request):
     return render(request, 'web/login.html', None)
 
+def register(request):
+    return render(request, 'web/register.html', None)
+
 #About Us
 def about(request):
     return render(request, 'web/about.html', None)
