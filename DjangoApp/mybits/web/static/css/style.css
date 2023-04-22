@@ -358,7 +358,7 @@ section {
     font: 12px/20px 'Spline Sans', sans-serif;
     overflow:hidden;
     padding-bottom:56.25%;
-    position:relative;
+    position:static;
     height:0;
 }
 
