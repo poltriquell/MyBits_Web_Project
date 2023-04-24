@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Restaurant(models.Model):
@@ -11,10 +12,12 @@ class Restaurant(models.Model):
     menu_pdf = models.CharField(max_length=100)
     id_localization = models.ForeignKey('Localization', on_delete=models.CASCADE)
 
+
 class Localization(models.Model):
     id_localization = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
+
 
 class Client(models.Model):
     id_client = models.AutoField(primary_key=True)
@@ -25,6 +28,18 @@ class Client(models.Model):
     email = models.CharField(max_length=50)
     card_number = models.CharField(max_length=50)
 
+
+from django.contrib.auth.models import User
+
+
+class Restaurant_Manager(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    id_manager = models.AutoField(primary_key=True)
+
+class Restaurant_Associated_Manager:
+    id = models.AutoField(primary_key=True)
+    manager = models.ForeignKey("Restaurant_Manager", on_delete=models.CASCADE)
+    restaurant_id = models.ForeignKey("Restaurant", on_delete=models.CASCADE)
 class Reservation(models.Model):
     id_reservation = models.AutoField(primary_key=True)
     date = models.DateField()
@@ -32,13 +47,15 @@ class Reservation(models.Model):
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 
+
 class Order(models.Model):
     id_order = models.AutoField(primary_key=True)
-    data= models.DateField()
+    data = models.DateField()
     total_price = models.FloatField()
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     description = models.CharField(max_length=50)
+
 
 class Menu(models.Model):
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
