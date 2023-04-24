@@ -41,8 +41,12 @@ urlpatterns = [
     path('menu/', wb.menu_list, name='menu-list'),
     path('menu/<int:id_menu>/', wb.menu_detail, name='menu-detail'),  
     
-    path('login/', wb.login, name='login-menu'),  
+    path('login/', wb.login, name='login-menu'), 
+    path('login/register/', wb.register, name='register-menu'),  
+    
     path('admin/', admin.site.urls),
+    
+    path('about_us/', wb.about, name='about-us'),
 ]
 
 # path('search/', search_bar, name='content_search'),

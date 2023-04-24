@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>The Fork Login Menu</title>
+    <title>The Fork Registration</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -29,20 +29,24 @@
   <body>
     <div class="container">
       <form class="form-signin">
-        <h2 class="form-signin-heading">The Fork Login</h2>
+        <h2 class="form-signin-heading">The Fork Registration</h2>
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="text" id="inputName" class="form-control half-input" placeholder="Name" required autofocus>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control half-input" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" class="form-control half-input" placeholder="Email address" required>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control half-input" placeholder="Password" required>
+        <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+        <input type="password" id="inputConfirmPassword" class="form-control half-input" placeholder="Confirm Password" required>
         <div class="checkbox mb-3">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="agree" required> I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
           </label>
         </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>
       <div class="d-flex" style="margin-top: 20px;">
-        <button class="btn btn-lg btn-primary mr-auto">Log In</button>
-        <p class="ml-auto">Still don't have an account? <a href="register/">Register</a></p>
+        <p class="ml-auto">Already have an account? <a href="../">Log In</a></p>
       </div>
     </div>
     <!-- Bootstrap JS -->
