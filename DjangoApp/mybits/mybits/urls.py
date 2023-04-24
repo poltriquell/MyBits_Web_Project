@@ -63,12 +63,11 @@ urlpatterns = [
     path('login/', wb.login, name='login-menu'), 
     path('login/register/', wb.register, name='register-menu'),  
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls'),
+    path('api-auth/', include('rest_framework.urls')),
     
     path('admin/', admin.site.urls),
    
-    path('about_us/', wb.about, name='about-us'),
-    
+    path('about_us/', wb.about, name='about-us'),    
 ]
 
 # path('search/', search_bar, name='content_search'),
