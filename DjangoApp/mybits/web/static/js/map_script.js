@@ -24,22 +24,22 @@ map.on('load', function () {
                             'type': 'Feature',
                             'properties': {
                                 'description':
-                                    '<strong>Make it Mount Pleasant</strong><p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>'
+                                    '<strong>Restaurant Masia Les Garrigues</strong><p>Make it Mount Pleasant is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>'
                             },
                             'geometry': {
                                 'type': 'Point',
-                                'coordinates': [-77.038659, 38.931567]
+                                'coordinates': [0.878970, 41.511622]
                             }
                         },
                         {
                             'type': 'Feature',
                             'properties': {
                                 'description':
-                                    '<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a Mad Men Season Five Finale Watch Party, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>'
+                                    '<strong>Escola Politècnica Superior</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a Mad Men Season Five Finale Watch Party, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>'
                             },
                             'geometry': {
                                 'type': 'Point',
-                                'coordinates': [-77.003168, 38.894651]
+                                'coordinates': [0.623511, 41.608998]
                             }
                         },
                         {
