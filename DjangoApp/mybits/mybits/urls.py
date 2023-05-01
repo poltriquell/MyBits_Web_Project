@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import *
 from django.conf.urls.static import static
 from django.conf import settings
-
+from web.views import add_restaurant, restaurant_list
 import web.views as wb
 
 urlpatterns = [
@@ -39,14 +39,20 @@ urlpatterns = [
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
     
     path('menu/', wb.menu_list, name='menu-list'),
-    path('menu/<int:id_menu>/', wb.menu_detail, name='menu-detail'),  
+    path('menu/<int:id_menu>/', wb.menu_detail, name='menu-detail'),
     
-    path('login/', wb.login, name='login-menu'), 
-    path('login/register/', wb.register, name='register-menu'),  
+    path('login/', wb.login, name='login-menu'),
+    path('login/register/', wb.register, name='register-menu'),
     
     path('admin/', admin.site.urls),
     
     path('about_us/', wb.about, name='about-us'),
+    
+    path('restaurant/create/', wb.add_restaurant, name='restaurant'),
+
+    path('accounts/login/', wb.LoginView.as_view(), name='login'),
+    path('accounts/logout/', wb.LogoutView.as_view(), name='logout'),
+
 ]
 
 # path('search/', search_bar, name='content_search'),

@@ -1,4 +1,4 @@
-from django import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Textarea, TextInput, FileInput
 from .models import Restaurant
 
 class RestaurantForm(ModelForm):
@@ -10,4 +10,6 @@ class RestaurantForm(ModelForm):
             form.field.widget.attrs['autocomplete'] = 'off'
     class Meta:
         model = Restaurant
-        fields = ['name', 'id_restaurant', 'phone', 'email', 'website', 'menu_pdf', 'id_localization']
+        fields = '__all__'
+
+
