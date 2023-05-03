@@ -59,7 +59,8 @@ ROOT_URLCONF = "mybits.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],                             # Important (Enric / Pol)
+        'DIRS': [os.path.join(BASE_DIR, 'DjangoApp/mybits/registration')],
+        # 'DIRS': [BASE_DIR / 'templates'],                             # Important (Enric / Pol)
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

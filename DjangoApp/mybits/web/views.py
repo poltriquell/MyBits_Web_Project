@@ -39,7 +39,7 @@ def client_detail(request, id_client):
 #Reservations
 def reservation_list(request):
     all_reservations = Reservation.objects.all()
-    return render(request, 'web/reservations.html', {"reservations" : all_reservations})   
+    return render(request, 'web/reservations.html', {"reservations" : all_reservations})
 
 def reservation_detail(request, id_book):
     one_reservation = Reservation.objects.get(pk=id_book)
@@ -48,7 +48,7 @@ def reservation_detail(request, id_book):
 #Orders
 def order_list(request):
     all_orders = Order.objects.all()
-    return render(request, 'web/orders.html', {"orders" : all_orders})  
+    return render(request, 'web/orders.html', {"orders" : all_orders})
 
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
@@ -57,7 +57,7 @@ def order_detail(request, id_order):
 #Menus
 def menu_list(request):
     all_menus = Menu.objects.all()
-    return render(request, 'web/menus.html', {"menus" : all_menus})  
+    return render(request, 'web/menus.html', {"menus" : all_menus})
 
 def menu_detail(request, id_rest):
     one_menu = Menu.objects.get(pk=id_rest)
@@ -67,7 +67,7 @@ def menu_detail(request, id_rest):
 def login(request):
     return render(request, 'web/login.html', None)
 
-#def register(request):
+# def register(request):
 #   return render(request, 'web/register.html', None)
 
 #About Us
@@ -170,7 +170,7 @@ class LoginView(RedirectURLMixin, FormView):
 
     form_class = AuthenticationForm
     authentication_form = None
-    template_name = "templates/web/login.html"
+    template_name = "DjangoApp/mybits/registration/login.html"
     redirect_authenticated_user = False
     extra_context = None
 
