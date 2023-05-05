@@ -7,82 +7,82 @@ from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
     all_restaurants = Restaurant.objects.all()
-    return render(request, 'web/home.html', {"restaurants" : all_restaurants})
+    return render(request, 'html/home.html', {"restaurants" : all_restaurants})
 
 #Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
-    return render(request, 'web/restaurants.html', {"restaurants" : all_restaurants})
+    return render(request, 'html/restaurants.html', {"restaurants" : all_restaurants})
 
 def restaurant_detail(request, id_rest):
     one_restaurant = Restaurant.objects.get(pk=id_rest)
-    return render(request, 'web/restaurant.html', {"restaurant" : one_restaurant})
+    return render(request, 'html/restaurant.html', {"restaurant" : one_restaurant})
 
 #Localizations
 def localization_list(request):
     all_localizations = Localization.objects.all()
-    return render(request, 'web/localizations.html', {"localizations" : all_localizations})
+    return render(request, 'html/localizations.html', {"localizations" : all_localizations})
 
 def localization_detail(request, id_loc):
     one_localization = Localization.objects.get(pk=id_loc)
-    return render(request, 'web/localization.html', {"localization" : one_localization})
+    return render(request, 'html/localization.html', {"localization" : one_localization})
 
 #Clients
 def client_list(request):
     all_clients = Client.objects.all()
-    return render(request, 'web/clients.html', {"clients" : all_clients})
+    return render(request, 'html/clients.html', {"clients" : all_clients})
 
 def client_detail(request, id_client):
     one_client = Client.objects.get(pk=id_client)
-    return render(request, 'web/client.html', {"client" : one_client})
+    return render(request, 'html/client.html', {"client" : one_client})
 
 #Reservations
 def reservation_list(request):
     all_reservations = Reservation.objects.all()
-    return render(request, 'web/reservations.html', {"reservations" : all_reservations})
+    return render(request, 'html/reservations.html', {"reservations" : all_reservations})
 
 def reservation_detail(request, id_book):
     one_reservation = Reservation.objects.get(pk=id_book)
-    return render(request, 'web/reservation.html', {"reservation" : one_reservation})
+    return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
 #Orders
 def order_list(request):
     all_orders = Order.objects.all()
-    return render(request, 'web/orders.html', {"orders" : all_orders})
+    return render(request, 'html/orders.html', {"orders" : all_orders})
 
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
-    return render(request, 'web/order.html', {"order" : one_order})
+    return render(request, 'html/order.html', {"order" : one_order})
 
 #Menus
 def menu_list(request):
     all_menus = Menu.objects.all()
-    return render(request, 'web/menus.html', {"menus" : all_menus})
+    return render(request, 'html/menus.html', {"menus" : all_menus})
 
 def menu_detail(request, id_rest):
     one_menu = Menu.objects.get(pk=id_rest)
-    return render(request, 'web/menu.html', {"menus" : one_menu})
+    return render(request, 'html/menu.html', {"menus" : one_menu})
 
 #Login
 def login(request):
-    return render(request, 'web/login.html', None)
+    return render(request, 'html/login.html', None)
 
 # def register(request):
 #   return render(request, 'web/register.html', None)
 
 #About Us
 def about(request):
-    return render(request, 'web/about.html', None)
+    return render(request, 'html/about.html', None)
 
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('web/home.html')
+            return redirect('html/home.html')
     else:
         form = UserCreationForm()
-    return render(request, 'web/register.html', {'form': form})
+    return render(request, 'html/register.html', {'form': form})
 
 @login_required
 def add_restaurant(request):
@@ -92,12 +92,12 @@ def add_restaurant(request):
         restaurant.user = request.user # set the user field to the current user
         restaurant.save()
         return redirect('restaurant_list', pk=restaurant.pk)
-    return render(request, 'web/add_restaurant.html', {'form': form})
+    return render(request, 'html/add_restaurant.html', {'form': form})
 
 def restaurant_list(request):
     restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos
     context = {'restaurants': restaurants} # crea un diccionario de contexto que contiene la lista de restaurantes
-    return render(request, 'web/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
+    return render(request, 'html/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
 
 from urllib.parse import urlparse, urlunparse
 
@@ -170,7 +170,7 @@ class LoginView(RedirectURLMixin, FormView):
 
     form_class = AuthenticationForm
     authentication_form = None
-    template_name = "DjangoApp/mybits/registration/login.html"
+    template_name = "registration/login.html"
     redirect_authenticated_user = False
     extra_context = None
 

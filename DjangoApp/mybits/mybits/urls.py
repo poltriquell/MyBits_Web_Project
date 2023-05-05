@@ -50,8 +50,8 @@ urlpatterns = [
     
     path('restaurant/create/', wb.add_restaurant, name='restaurant'),
 
-    path('accounts/login/', wb.LoginView.as_view(), name='login'),
-    path('accounts/logout/', wb.LogoutView.as_view(), name='logout'),
+    path('accounts/login', wb.LoginView.as_view(), name='login'),
+    path('accounts/login', wb.LogoutView.as_view(), name='logout'),
 
 ]
 
