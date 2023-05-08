@@ -8,23 +8,29 @@
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.css" rel="stylesheet" />
 <style>
   body {margin: 0; padding: 0;}
-  #map {position: absolute; top: 0; bottom: 0; width: 100%;}
+  #map {position: absolute; top: 0; bottom: 0; width: 100%;height: 400px;}
 </style>
 </head>
 <body>
 <style>
-    .mapboxgl-popup {
-        max-width: 400px;
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
+  .mapboxgl-popup {
+    max-width: 400px;
+    font: 12px/20px 'Spline Sans', sans-serif;
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:static;
+    height:0;
+  }
 </style>
 <div id="map"></div>
 <script>
+    var longitude = {{restaurant.longitude}}
+    var latitude = {{restaurant.latitude}}
     maptilersdk.config.apiKey = '0QBDko4qhpzabIA4ZV39';
     var map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.STREETS,
-        center: [41.61190166665466, 0.6261579652893146],
+        center: [latitude, longitude],
         zoom: 7
     });
 
@@ -35,8 +41,7 @@
             function (error, image) {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
-                var longitude = {{restaurant.longitude}}
-                var latitude = {{restaurant.latitude}}
+                
     
                 map.addSource('places', {
                     'type': 'geojson',
