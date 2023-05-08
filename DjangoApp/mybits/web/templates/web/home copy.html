@@ -22,33 +22,41 @@
     height:0;
   }
 </style>
-<script>
-  var restaurants = [
-      {% for restaurant in restaurants %}
-      {
-          'type': 'Feature',
-          'properties': {
-              'description': '<strong>{{ restaurant.name }}</strong><p>{{ restaurant.phone }}</p><p>{{ restaurant.email }}</p><p>{{ restaurant.website }}</p><p>{{ restaurant.menu_url }}</p>'
-          },
-          'geometry': {
-              'type': 'Point',
-              'coordinates': [{{ restaurant.longitude }}, {{ restaurant.latitude }}]
-          }
-      },
-      {% endfor %}
-  ];
-</script>
 <div id="map"></div>
 <script>
+  var geojson_map = {
+    'type': 'FeatureCollection',
+    'features': [
+    {% if reservations %}
+        {% for restaurant in restaurants %}
+        {
+            'type': 'Feature',
+            'properties': {
+              '<strong>{{restaurant.name}}O</strong><p>{{restaurant.phone}}</p><p>{{restaurant.email}}</p><p>{{restaurant.website}}</p><p>{{restaurant.menu_url}}</p>'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [{{ restaurant.longitude }}, {{ restaurant.latitude }}]
+            }
+        },
+        {% endfor %}
+        {% else %}
+		<p>No reservations registered in the database.</p>
+	{% endif %}
+    ]
+};
+geojson_map
     maptilersdk.config.apiKey = '0QBDko4qhpzabIA4ZV39';
     var map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.STREETS,
-        center: [0, 0],
-        zoom: 2
+        center: [-77.04, 38.907],
+        zoom: 5
     });
 
     map.on('load', function () {
+
+    
         map.loadImage(
             'https://docs.maptiler.com/sdk-js/assets/custom_marker.png',
             // Add an image to use as a custom marker
@@ -58,12 +66,9 @@
                 
     
                 map.addSource('places', {
-                  'type': 'geojson',
-                  'data': {
-                      'type': 'FeatureCollection',
-                      'features': restaurants
-                  }
-              });
+                    'type': 'geojson',
+                    'data': geojson_map
+                });
 
                 // Add a layer showing the places.
                 map.addLayer({

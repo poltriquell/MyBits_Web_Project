@@ -1,0 +1,17 @@
+var geojson_map = {
+    'type': 'FeatureCollection',
+    'features': [
+        {% for restaurant in restaurants %}
+        {
+            'type': 'Feature',
+            'properties': {
+              '<strong>{{restaurant.name}}O</strong><p>{{restaurant.phone}}</p><p>{{restaurant.email}}</p><p>{{restaurant.website}}</p><p>{{restaurant.menu_url}}</p>'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [{{ restaurant.longitude }}, {{ restaurant.latitude }}]
+            }
+        },
+        {% endfor %}
+    ]
+};
