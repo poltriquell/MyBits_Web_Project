@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "behave_django",
     "web",
 ]
 
@@ -58,7 +59,7 @@ ROOT_URLCONF = "mybits.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],                             # Important (Enric / Pol)
+        'DIRS': [BASE_DIR / 'templates'],                             # Important (Enric / Pol)
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

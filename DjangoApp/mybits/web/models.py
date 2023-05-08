@@ -8,7 +8,7 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     website = models.CharField(max_length=50)
-    menu_pdf = models.CharField(max_length=100)
+    menu_pdf = models.FileField(upload_to='documents/')
     id_localization = models.ForeignKey('Localization', on_delete=models.CASCADE)
 
 class Localization(models.Model):
@@ -45,3 +45,4 @@ class Menu(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
+
