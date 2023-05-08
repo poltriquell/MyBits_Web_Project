@@ -24,6 +24,7 @@ class Client(models.Model):
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
+    admin=models.BooleanField
     card_number = models.CharField(max_length=50)
 
 class Reservation(models.Model):
