@@ -79,10 +79,10 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('html/home.html')
+            return redirect('home')
     else:
         form = UserCreationForm()
-    return render(request, 'html/register.html', {'form': form})
+    return render(request, 'html/signup.html', {'form': form})
 
 @login_required
 def add_restaurant(request):

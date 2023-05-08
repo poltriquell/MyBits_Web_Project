@@ -25,7 +25,7 @@ from django.views.static import serve
 from django.conf import settings
 
 urlpatterns = [
-    path('', wb.home, name='Home'),
+    path('', wb.home, name='home'),
 
     path('restaurant/', wb.restaurant_list, name='restaurant-list'),
     path('restaurant/<int:id_rest>/', wb.restaurant_detail, name='restaurant-detail'),
@@ -55,9 +55,9 @@ urlpatterns = [
     path('restaurant/create/', wb.add_restaurant, name='restaurant'),
 
     path('accounts/login', wb.LoginView.as_view(), name='login'),
-    path('accounts/register', wb.register, name='register'),
-    path('accounts/login', wb.LogoutView.as_view(), name='logout'),
-    
+    path('accounts/signup', wb.register, name='signup'),
+    path('accounts/logout', wb.LogoutView.as_view(), name='logout'),
+
 ]
 
 # path('search/', search_bar, name='content_search'),
