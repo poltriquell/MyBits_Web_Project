@@ -3,86 +3,90 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.models import model_to_dict
+
 
 
 def home(request):
     all_restaurants = Restaurant.objects.all()
-    return render(request, 'html/home.html', {"restaurants" : all_restaurants})
+    return render(request, 'web/home.html', {"restaurants" : all_restaurants})
 
 #Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
-    return render(request, 'html/restaurants.html', {"restaurants" : all_restaurants})
+    return render(request, 'web/restaurants.html', {"restaurants" : all_restaurants})
 
 def restaurant_detail(request, id_rest):
     one_restaurant = Restaurant.objects.get(pk=id_rest)
-    return render(request, 'html/restaurant.html', {"restaurant" : one_restaurant})
+    restaurant_dict = model_to_dict(one_restaurant)
+    context = {'restaurant': restaurant_dict}
+    return render(request, 'web/restaurant.html', context)
 
 #Localizations
 def localization_list(request):
     all_localizations = Localization.objects.all()
-    return render(request, 'html/localizations.html', {"localizations" : all_localizations})
+    return render(request, 'web/localizations.html', {"localizations" : all_localizations})
 
 def localization_detail(request, id_loc):
     one_localization = Localization.objects.get(pk=id_loc)
-    return render(request, 'html/localization.html', {"localization" : one_localization})
+    return render(request, 'web/localization.html', {"localization" : one_localization})
 
 #Clients
 def client_list(request):
     all_clients = Client.objects.all()
-    return render(request, 'html/clients.html', {"clients" : all_clients})
+    return render(request, 'web/clients.html', {"clients" : all_clients})
 
 def client_detail(request, id_client):
     one_client = Client.objects.get(pk=id_client)
-    return render(request, 'html/client.html', {"client" : one_client})
+    return render(request, 'web/client.html', {"client" : one_client})
 
 #Reservations
 def reservation_list(request):
     all_reservations = Reservation.objects.all()
-    return render(request, 'html/reservations.html', {"reservations" : all_reservations})
+    return render(request, 'web/reservations.html', {"reservations" : all_reservations})
 
 def reservation_detail(request, id_book):
     one_reservation = Reservation.objects.get(pk=id_book)
-    return render(request, 'html/reservation.html', {"reservation" : one_reservation})
+    return render(request, 'web/reservation.html', {"reservation" : one_reservation})
 
 #Orders
 def order_list(request):
     all_orders = Order.objects.all()
-    return render(request, 'html/orders.html', {"orders" : all_orders})
+    return render(request, 'web/orders.html', {"orders" : all_orders})
 
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
-    return render(request, 'html/order.html', {"order" : one_order})
+    return render(request, 'web/order.html', {"order" : one_order})
 
 #Menus
 def menu_list(request):
     all_menus = Menu.objects.all()
-    return render(request, 'html/menus.html', {"menus" : all_menus})
+    return render(request, 'web/menus.html', {"menus" : all_menus})
 
 def menu_detail(request, id_rest):
     one_menu = Menu.objects.get(pk=id_rest)
-    return render(request, 'html/menu.html', {"menus" : one_menu})
+    return render(request, 'web/menu.html', {"menus" : one_menu})
 
 #Login
 def login(request):
-    return render(request, 'html/login.html', None)
+    return render(request, 'web/login.html', None)
 
 # def register(request):
 #   return render(request, 'web/register.html', None)
 
 #About Us
 def about(request):
-    return render(request, 'html/about.html', None)
+    return render(request, 'web/about.html', None)
 
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('web/home.html')
     else:
         form = UserCreationForm()
-    return render(request, 'html/signup.html', {'form': form})
+    return render(request, 'web/register.html', {'form': form})
 
 @login_required
 def add_restaurant(request):
@@ -92,12 +96,12 @@ def add_restaurant(request):
         restaurant.user = request.user # set the user field to the current user
         restaurant.save()
         return redirect('restaurant_list', pk=restaurant.pk)
-    return render(request, 'html/add_restaurant.html', {'form': form})
+    return render(request, 'web/add_restaurant.html', {'form': form})
 
 def restaurant_list(request):
     restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos
     context = {'restaurants': restaurants} # crea un diccionario de contexto que contiene la lista de restaurantes
-    return render(request, 'html/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
+    return render(request, 'web/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
 
 from urllib.parse import urlparse, urlunparse
 
@@ -162,6 +166,7 @@ class RedirectURLMixin:
             return resolve_url(self.next_page)
         raise ImproperlyConfigured("No URL to redirect to. Provide a next_page.")
 
+
 class LoginView(RedirectURLMixin, FormView):
     """
     Display the login form and handle the login action.
@@ -169,7 +174,7 @@ class LoginView(RedirectURLMixin, FormView):
 
     form_class = AuthenticationForm
     authentication_form = None
-    template_name = "registration/login.html"
+    template_name = "DjangoApp/mybits/registration/login.html"
     redirect_authenticated_user = False
     extra_context = None
 
@@ -297,3 +302,183 @@ def redirect_to_login(next, login_url=None, redirect_field_name=REDIRECT_FIELD_N
 # - PasswordResetConfirmView checks the link the user clicked and
 #   prompts for a new password
 # - PasswordResetCompleteView shows a success message for the above
+
+
+class PasswordContextMixin:
+    extra_context = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(
+            {"title": self.title, "subtitle": None, **(self.extra_context or {})}
+        )
+        return context
+
+
+class PasswordResetView(PasswordContextMixin, FormView):
+    email_template_name = "registration/password_reset_email.html"
+    extra_email_context = None
+    form_class = PasswordResetForm
+    from_email = None
+    html_email_template_name = None
+    subject_template_name = "registration/password_reset_subject.txt"
+    success_url = reverse_lazy("password_reset_done")
+    template_name = "registration/password_reset_form.html"
+    title = _("Password reset")
+    token_generator = default_token_generator
+
+    @method_decorator(csrf_protect)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        opts = {
+            "use_https": self.request.is_secure(),
+            "token_generator": self.token_generator,
+            "from_email": self.from_email,
+            "email_template_name": self.email_template_name,
+            "subject_template_name": self.subject_template_name,
+            "request": self.request,
+            "html_email_template_name": self.html_email_template_name,
+            "extra_email_context": self.extra_email_context,
+        }
+        form.save(**opts)
+        return super().form_valid(form)
+
+
+INTERNAL_RESET_SESSION_TOKEN = "_password_reset_token"
+
+
+class PasswordResetDoneView(PasswordContextMixin, TemplateView):
+    template_name = "registration/password_reset_done.html"
+    title = _("Password reset sent")
+
+
+class PasswordResetConfirmView(PasswordContextMixin, FormView):
+    form_class = SetPasswordForm
+    post_reset_login = False
+    post_reset_login_backend = None
+    reset_url_token = "set-password"
+    success_url = reverse_lazy("password_reset_complete")
+    template_name = "registration/password_reset_confirm.html"
+    title = _("Enter new password")
+    token_generator = default_token_generator
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        if "uidb64" not in kwargs or "token" not in kwargs:
+            raise ImproperlyConfigured(
+                "The URL path must contain 'uidb64' and 'token' parameters."
+            )
+
+        self.validlink = False
+        self.user = self.get_user(kwargs["uidb64"])
+
+        if self.user is not None:
+            token = kwargs["token"]
+            if token == self.reset_url_token:
+                session_token = self.request.session.get(INTERNAL_RESET_SESSION_TOKEN)
+                if self.token_generator.check_token(self.user, session_token):
+                    # If the token is valid, display the password reset form.
+                    self.validlink = True
+                    return super().dispatch(*args, **kwargs)
+            else:
+                if self.token_generator.check_token(self.user, token):
+                    # Store the token in the session and redirect to the
+                    # password reset form at a URL without the token. That
+                    # avoids the possibility of leaking the token in the
+                    # HTTP Referer header.
+                    self.request.session[INTERNAL_RESET_SESSION_TOKEN] = token
+                    redirect_url = self.request.path.replace(
+                        token, self.reset_url_token
+                    )
+                    return HttpResponseRedirect(redirect_url)
+
+        # Display the "Password reset unsuccessful" page.
+        return self.render_to_response(self.get_context_data())
+
+    def get_user(self, uidb64):
+        try:
+            # urlsafe_base64_decode() decodes to bytestring
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = UserModel._default_manager.get(pk=uid)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+            UserModel.DoesNotExist,
+            ValidationError,
+        ):
+            user = None
+        return user
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.user
+        return kwargs
+
+    def form_valid(self, form):
+        user = form.save()
+        del self.request.session[INTERNAL_RESET_SESSION_TOKEN]
+        if self.post_reset_login:
+            auth_login(self.request, user, self.post_reset_login_backend)
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.validlink:
+            context["validlink"] = True
+        else:
+            context.update(
+                {
+                    "form": None,
+                    "title": _("Password reset unsuccessful"),
+                    "validlink": False,
+                }
+            )
+        return context
+
+
+class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
+    template_name = "registration/password_reset_complete.html"
+    title = _("Password reset complete")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["login_url"] = resolve_url(settings.LOGIN_URL)
+        return context
+
+
+class PasswordChangeView(PasswordContextMixin, FormView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy("password_change_done")
+    template_name = "registration/password_change_form.html"
+    title = _("Password change")
+
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one.
+        update_session_auth_hash(self.request, form.user)
+        return super().form_valid(form)
+
+
+class PasswordChangeDoneView(PasswordContextMixin, TemplateView):
+    template_name = "registration/password_change_done.html"
+    title = _("Password change successful")
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
