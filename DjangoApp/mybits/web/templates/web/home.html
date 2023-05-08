@@ -32,7 +32,7 @@
           },
           'geometry': {
               'type': 'Point',
-              'coordinates': [{{ restaurant.longitude }}, {{ restaurant.latitude }}]
+              'coordinates': [{{ restaurant.latitude }}, {{ restaurant.longitude }}]
           }
       },
       {% endfor %}
@@ -44,8 +44,9 @@
     var map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.STREETS,
-        center: [0, 0],
-        zoom: 2
+        geolocate: maptilersdk.GeolocationType.POINT
+
+
     });
 
     map.on('load', function () {
@@ -55,7 +56,7 @@
             function (error, image) {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
-                
+     
     
                 map.addSource('places', {
                   'type': 'geojson',
