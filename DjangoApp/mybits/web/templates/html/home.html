@@ -8,26 +8,31 @@
       margin-top: 80px;
     }
   </style>
-
   <title>My Bits - Bootstrap Landing Page</title>
-  
   <!-- Boostrap Css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
   <!-- Remix Icons -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-  
   <!-- Style Css -->
   <link rel="stylesheet" href="../../static/css/style.css">
 
   <!-- Map API -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.umd.js"></script>
+  <title>Center map based on visitor's location</title>
+  <script src="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.umd.min.js"></script>
   <link href="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.css" rel="stylesheet" />
   <style>
     body { margin: 0; padding: 0; }
-    #map { position: relative; height:500px; width: 100%;}
+    #map { position: relative; height:900px; width: 100%; 
+    }
+    section {
+        margin: 15px;
+      }
+      footer {
+        margin-top: 50px;
+      }
+    
   </style>
 
 </head>
@@ -37,7 +42,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">MyBits</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,73 +63,149 @@
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-but">
-            <a class="btn btn-outline-light" href="accounts/signup"> Sign Up </a>
+            <a class="btn btn-outline-light" href="login/register/"> Sign Up </a>
           </li>
           <li class="nav-but">
-            <a class="btn btn-outline-light" href="accounts/login"> Log In </a>
-          </li>
-          <li class="nav-but">
-            <a class="btn btn-outline-light" href="accounts/login"> Prova form user </a>
+            <a class="btn btn-outline-light" href="login/"> Log In </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  
+  
 
-  <!-- Hero Slider -->
-  <div id="heroSlider" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
 
-          <div class="carousel-item text-center bg-cover vh-100 active slide-1">
-              <div class="container h-100 d-flex align-items-center justify-content-center">
-                  <div class="row justify-content-center">
-                      <div class="col-lg-8">
-                          <h6 class="text-white"> WELCOME TO MY BITS</h6>
-                          <h1 class="display-1 my-3 fw-bold text-white"> Char-grilled and flavor-filled </h1>
-                          <a href="reservation/" class="btn btn-brand"> Reservation </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
+  
+  <!-- Map API -->
+  <div id="map"></div>
 
-          <div class="carousel-item text-center bg-cover vh-100 slide-2">
-              <div class="container h-100 d-flex align-items-center justify-content-center">
-                  <div class="row justify-content-center">
-                      <div class="col-lg-8">
-                          <h6 class="text-white"> WELCOME TO MY BITS</h6>
-                          <h1 class="display-1 my-3 fw-bold text-white"> Fresh & Tasty Food </h1>
-                          <a href="reservation/" class="btn btn-brand"> Reservation </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"> Previous </span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden"> Next </span>
-      </button>
-  </div>
+  <script>
+    var restaurants = [
+        {% for restaurant in restaurants %}
+        {
+            'type': 'Feature',
+            'properties': {
+                'description': '<strong>{{restaurant.name}}</strong><p>Telefono:{{restaurant.phone }}</p><p>Mail:{{restaurant.email }}</p><p>Web:{{restaurant.website }}</p><p>{{ restaurant.menu_url }}</p>'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [{{ restaurant.latitude }}, {{ restaurant.longitude }}]
+            }
+        },
+        {% endfor %}
+    ];
+  </script>
 
-  <header>
-    <h1>Restaurantes cerca de ti</h1>
-  </header>
+  <script>
+    maptilersdk.config.apiKey = '0QBDko4qhpzabIA4ZV39';
+    var map = new maptilersdk.Map({
+        container: 'map',
+        style: maptilersdk.MapStyle.STREETS,
+        geolocate: maptilersdk.GeolocationType.POINT,
+        terrain:true,
+        showUserLocation:true
 
-  <main>
+    });
+
+  
+
+    map.on('load', function () {
+        map.loadImage(
+            'https://docs.maptiler.com/sdk-js/assets/custom_marker.png',
+            // Add an image to use as a custom marker
+            function (error, image) {
+                if (error) throw error;
+                map.addImage('custom-marker', image);
+                map.scrollZoom.disable();
+                map.boxZoom.disable();
+                map.addControl(new maptilersdk.FullscreenControl({container: document.querySelector('body')}));
+                map.addSource('places', {
+                  'type': 'geojson',
+                  'data': {
+                      'type': 'FeatureCollection',
+                      'features': restaurants
+                  }
+              });
+
+
+                // Add a layer showing the places.
+                map.addLayer({
+                    'id': 'places',
+                    'type': 'symbol',
+                    'source': 'places',
+                    'layout': {
+                        'icon-image': 'custom-marker',
+                        'icon-overlap': 'always'
+                    }
+                });
+                map.addControl(new maptilersdk.MaptilerGeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                  }), 'top-left');
+            }
+        );
+
+        map.on('click', 'symbols', function (e) {
+            map.flyTo({
+                center: e.features[0].geometry.coordinates
+            });
+        });
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new maptilersdk.Popup({
+            closeButton: true,
+            closeOnClick: false
+        });
+
+        map.on('mouseenter', 'places', function (e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(coordinates).setHTML(description).addTo(map);
+        });
+
+
+
+        map.on('mouseleave', 'places', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+</script>
+
+
+  <!-- label search-->
+
+
+  
+
+  <!-- LIST -->
+<main>
     <section>
-      <h1>Restaurants List</h1>
+      <h1>Nuestros restaurantes </h1>
+      <h2>La selección de los mejores restaurantes en todo el mundo. </h2>
       {% if restaurants %}
         <ul>
         {% for restaurant in restaurants %}
-          <li>{{ restaurant.name }}</li>
-          <li>{{ restaurant.phone }}</li>
-          <li>{{ restaurant.email }}</li>
-          <li>{{ restaurant.website }}</li>
-          <li>{{ restaurant.id_localization.address }}, {{ restaurant.id_localization.name }}</li>
-          <p></p>
+            <li><h3>{{ restaurant.name }}</h3></li>
+            {{ restaurant.phone }}
+            {{ restaurant.email }}
+            {{ restaurant.website }}
+            <p></p>
         {% endfor %}
         </ul>
       {% else %}
@@ -132,87 +213,14 @@
       {% endif %}
     </section>
   </main>
-
   
-  <main>
-    <section id="hero">
-      <div class="container">
-        <h1>Discover the best restaurants near you</h1>
-        <form>
-          <label for="location">Where</label>
-          <input type="text" id="location" placeholder="City or ZIP code">
-          <button type="submit">Search</button>
-        </form>
-      </div>
-    </section>
 
-    <section id="popular">
-      <div class="container">
-        <h2>Popular cities</h2>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?paris" alt="Paris">
-          <h3>Paris</h3>
-        </div>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?new-york" alt="New York">
-          <h3>New York</h3>
-        </div>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?tokyo" alt="Tokyo">
-          <h3>Tokyo</h3>
-        </div>
-      </div>
-    </section>
-    <p></p>
-    <section id="discover">
-      <div class="container">
-        <h2>Discover new restaurants</h2>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?restaurant" alt="Restaurant">
-          <h3>La Belle Epoque</h3>
-          <p>French cuisine</p>
-          <button>Book a table</button>
-        </div>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?dinner" alt="Dinner">
-          <h3>The Smokehouse</h3>
-          <p>American cuisine</p>
-          <button>Book a table</button>
-        </div>
-        <div class="card">
-          <img src="https://source.unsplash.com/800x600/?sushi" alt="Sushi">
-          <h3>Sushi Saito</h3>
-          <p>Japanese cuisine</p>
-          <button>Book a table</button>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <!-- Map API -->
-  <style>
-    .mapboxgl-popup {
-      max-width: 400px;
-      font: 12px/20px 'Spline Sans', sans-serif;
-      overflow:hidden;
-      padding-bottom:56.25%;
-      position:static;
-      height:0;
-    }
-  </style>
-  <div id="map"></div>
-  <script src="../static/js/map_script.js"></script>
 
-  <!-- Discover best restaurants -->
-  <div>
-    <h2>Discover the best restaurants with MyBits</h2>
-    <p>At MyBits, we offer you a selection of over 60,000 restaurants throughout Spain, with the best promotions available for booking at any time. You can also rely on our 20 million verified reviews to help you find the perfect restaurant for you.</p>
-    <p>Whether you're looking for the trendiest restaurants in Madrid, an authentic Japanese restaurant in Barcelona, the best rice dishes in Valencia, or a romantic dinner in any city, MyBits has a wide variety of options for all tastes.</p>
-    <p>Don't miss the chance to book a restaurant for Valentine's Day in Barcelona or any other city you find yourself in. Find the best restaurants on MyBits and enjoy a unique gastronomic experience!</p>
-  </div>
 
   <!-- footer -->
-  <footer class="bg-cover">
+ 
+  <footer>
     <div class="footer-top">
         <div class="container">
             <div class="row gy-5">
