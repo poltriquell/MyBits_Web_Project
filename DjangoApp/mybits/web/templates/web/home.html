@@ -42,7 +42,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">MyBits</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -86,7 +86,7 @@
         {
             'type': 'Feature',
             'properties': {
-                'description': '<strong>{{ restaurant.name }}</strong><p>{{ restaurant.phone }}</p><p>{{ restaurant.email }}</p><p>{{ restaurant.website }}</p><p>{{ restaurant.menu_url }}</p>'
+                'description': '<strong>{{restaurant.name}}</strong><p>Telefono:{{restaurant.phone }}</p><p>Mail:{{restaurant.email }}</p><p>Web:{{restaurant.website }}</p><p>{{ restaurant.menu_url }}</p>'
             },
             'geometry': {
                 'type': 'Point',
@@ -102,8 +102,10 @@
     var map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.STREETS,
-        geolocate: maptilersdk.GeolocationType.POINT
-       
+        geolocate: maptilersdk.GeolocationType.POINT,
+        terrain:true,
+        showUserLocation:true
+
     });
 
   
@@ -126,7 +128,6 @@
                   }
               });
 
-              
 
                 // Add a layer showing the places.
                 map.addLayer({
@@ -138,12 +139,24 @@
                         'icon-overlap': 'always'
                     }
                 });
+                map.addControl(new maptilersdk.MaptilerGeolocateControl({
+                    positionOptions: {
+                        enableHighAccuracy: true
+                    },
+                    trackUserLocation: true
+                  }), 'top-left');
             }
         );
 
+        map.on('click', 'symbols', function (e) {
+            map.flyTo({
+                center: e.features[0].geometry.coordinates
+            });
+        });
+
         // Create a popup, but don't add it to the map yet.
         var popup = new maptilersdk.Popup({
-            closeButton: false,
+            closeButton: true,
             closeOnClick: false
         });
 
@@ -166,9 +179,10 @@
             popup.setLngLat(coordinates).setHTML(description).addTo(map);
         });
 
+
+
         map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
-            popup.remove();
         });
     });
 </script>
@@ -187,12 +201,11 @@
       {% if restaurants %}
         <ul>
         {% for restaurant in restaurants %}
-          <li>{{ restaurant.name }}</li>
-          <li>{{ restaurant.phone }}</li>
-          <li>{{ restaurant.email }}</li>
-          <li>{{ restaurant.website }}</li>
-          <li>{{ restaurant.id_localization.address }}, {{ restaurant.id_localization.name }}</li>
-          <p></p>
+            <li><h3>{{ restaurant.name }}</h3></li>
+            {{ restaurant.phone }}
+            {{ restaurant.email }}
+            {{ restaurant.website }}
+            <p></p>
         {% endfor %}
         </ul>
       {% else %}
