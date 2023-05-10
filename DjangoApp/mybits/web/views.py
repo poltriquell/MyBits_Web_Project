@@ -69,7 +69,7 @@ def menu_detail(request, id_rest):
 
 #Login
 def login(request):
-    return render(request, 'DjangoApp/mybits/web/templates/registration/login.html', None)
+    return render(request, 'web/login.html', None)
 
 #About Us
 def about(request):
@@ -171,7 +171,7 @@ class LoginView(RedirectURLMixin, FormView):
 
     form_class = AuthenticationForm
     authentication_form = None
-    template_name = "/DjangoApp/mybits/web/templates/web/registration/login.html"
+    template_name = "login.html"
     redirect_authenticated_user = False
     extra_context = None
 
