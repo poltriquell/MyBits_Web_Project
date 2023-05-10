@@ -51,6 +51,7 @@ urlpatterns = [
     path('restaurant/create/', wb.add_restaurant, name='restaurant'),
 
     path('accounts/login/', wb.LoginView.as_view(), name='login'),
+    path('accounts/signup/', wb.register, name='signup'),
     path('accounts/logout/', wb.LogoutView.as_view(), name='logout'),
 
 ]
