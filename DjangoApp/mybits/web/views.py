@@ -49,11 +49,22 @@ def reservation_detail(request, id_book):
     one_reservation = Reservation.objects.get(pk=id_book)
     return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
+
+@login_required
+def create_order(request):
+    if request.method == 'POST':
+        data = request.POST.get('data')
+        total_price = request.POST.get('total_price')
+        
+        
+    return render(request, 'web/orders.html')
 #Orders
+@login_required
 def order_list(request):
     all_orders = Order.objects.all()
     return render(request, 'html/orders.html', {"orders" : all_orders})
 
+@login_required
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
     return render(request, 'html/order.html', {"order" : one_order})
