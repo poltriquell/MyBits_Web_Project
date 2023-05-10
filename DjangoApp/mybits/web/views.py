@@ -69,10 +69,7 @@ def menu_detail(request, id_rest):
 
 #Login
 def login(request):
-    return render(request, 'web/login.html', None)
-
-# def register(request):
-#   return render(request, 'web/register.html', None)
+    return render(request, 'DjangoApp/mybits/web/templates/registration/login.html', None)
 
 #About Us
 def about(request):
@@ -83,7 +80,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('web/home.html')
+            return redirect('Home')
     else:
         form = UserCreationForm()
     return render(request, 'web/register.html', {'form': form})
@@ -174,7 +171,7 @@ class LoginView(RedirectURLMixin, FormView):
 
     form_class = AuthenticationForm
     authentication_form = None
-    template_name = "DjangoApp/mybits/registration/login.html"
+    template_name = "/DjangoApp/mybits/web/templates/web/registration/login.html"
     redirect_authenticated_user = False
     extra_context = None
 
