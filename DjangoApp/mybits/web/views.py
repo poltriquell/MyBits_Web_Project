@@ -49,34 +49,31 @@ def reservation_detail(request, id_book):
     one_reservation = Reservation.objects.get(pk=id_book)
     return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
-
-@login_required
 def create_order(request):
     if request.method == 'POST':
-        data = request.POST.get('data')
-        total_price = request.POST.get('total_price')
-        
-        
-    return render(request, 'web/orders.html')
+        data_order = request.POST.get('fecha')
+        price_order = request.POST.get('total_price')
+        description_order = request.POST.get('description')
+        client_id = request.user.id
+        product_list = request.POST.getlist('product_list[]')
+        order = Order(fecha=data_order, total_price=price_order, client_id=client_id, restaurant=restaurant, description=description_order)
+        order.save()
+
+        # Redirigir al usuario a la página de detalle de la nueva orden
+        return redirect('order_detail', order_id=order.id) 
+    else:
+        return render(request, 'html/create_order.html')
+
+    
 #Orders
-@login_required
 def order_list(request):
     all_orders = Order.objects.all()
-    return render(request, 'html/orders.html', {"orders" : all_orders})
+    return render(request, 'html/orders_list.html', {"orders" : all_orders})
 
-@login_required
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
-    return render(request, 'html/order.html', {"order" : one_order})
+    return render(request, 'html/order_info.html', {"order" : one_order})
 
-#Menus
-def menu_list(request):
-    all_menus = Menu.objects.all()
-    return render(request, 'html/menus.html', {"menus" : all_menus})
-
-def menu_detail(request, id_rest):
-    one_menu = Menu.objects.get(pk=id_rest)
-    return render(request, 'html/menu.html', {"menus" : one_menu})
 
 #Login
 def login(request):

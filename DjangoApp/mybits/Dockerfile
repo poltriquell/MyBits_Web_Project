@@ -41,8 +41,10 @@ USER appuser
 ENV SECRET_KEY=$SECRET_KEY
 
 # Run the migrations
-RUN python3 manage.py makemigrations
-RUN python3 manage.py migrate
+#RUN python3 manage.py makemigrations
+#RUN python3 manage.py migrate
+# python3 manage.py createsuperuser
+
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # File wsgi.py was not found. Please enter the Python path to wsgi file.
