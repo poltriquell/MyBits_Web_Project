@@ -13,6 +13,7 @@ class Restaurant(models.Model):
     
 class Menu(models.Model):
     id_menu = models.AutoField(primary_key=True, default=1)
+    descripcion_menu = models.CharField(max_length=50)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
     
 class Localization(models.Model):
@@ -39,8 +40,6 @@ class Reservation(models.Model):
 
 class Order(models.Model):
     id_order = models.AutoField(primary_key=True)
-    fecha = models.DateField(default='2021-01-01')
-    total_price = models.FloatField()
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
     description = models.CharField(max_length=50)
