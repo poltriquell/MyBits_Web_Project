@@ -11,15 +11,6 @@ class Restaurant(models.Model):
     longitude = models.FloatField(default=41.6)  # Define tu valor predeterminado aquí
     latitude = models.FloatField(default=0.6226)  # Define tu valor predeterminado aquí
     
-    
-class Product(models.Model):
-    id_product = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='Pan con tomate')
-    price = models.FloatField(default=20.0)
-    description = models.CharField(max_length=50, default='Pan con tomate')
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    menu = models.ForeignKey('Menu', on_delete=models.CASCADE)
-    
 class Menu(models.Model):
     id_menu = models.AutoField(primary_key=True, default=1)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
@@ -53,3 +44,4 @@ class Order(models.Model):
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
     description = models.CharField(max_length=50)
+

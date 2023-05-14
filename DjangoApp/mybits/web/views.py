@@ -51,6 +51,17 @@ def reservation_detail(request, id_book):
 
 def create_order(request):
     if request.method == 'POST':
+       # pidele
+
+
+
+        return redirect('order_detail', order_id=order.id) 
+    else:
+        return render(request, 'html/create_order.html')
+
+
+def reservar_restaurante(request):
+    if request.method == 'POST':
         data_order = request.POST.get('fecha')
         price_order = request.POST.get('total_price')
         description_order = request.POST.get('description')
@@ -64,7 +75,7 @@ def create_order(request):
     else:
         return render(request, 'html/create_order.html')
 
-    
+
 #Orders
 def order_list(request):
     all_orders = Order.objects.all()
