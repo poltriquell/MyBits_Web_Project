@@ -61,7 +61,6 @@ def create_order(request):
     else:
         return render(request, 'html/create_order.html')
 
-
 def reservar_restaurante(request):
     if request.method == 'POST':
         data_order = request.POST.get('fecha')

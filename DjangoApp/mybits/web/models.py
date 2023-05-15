@@ -42,5 +42,5 @@ class Order(models.Model):
     id_order = models.AutoField(primary_key=True)
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
-    description = models.CharField(max_length=50)
+    cantidad = models.IntegerField(default=1)
 

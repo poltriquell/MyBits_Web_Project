@@ -39,8 +39,6 @@ urlpatterns = [
     path('order/', wb.order_list, name='order-list'),
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
 
-
-
     path('login/', wb.login, name='login-menu'),
     path('login/register/', wb.register, name='register-menu'),
 
