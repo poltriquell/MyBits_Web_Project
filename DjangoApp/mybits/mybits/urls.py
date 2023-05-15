@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import *
 from django.conf.urls.static import static
 from django.conf import settings
-from web.views import add_restaurant, restaurant_list
+from web.views import restaurant_list
 import web.views as wb
 
 from django.contrib.auth import views
@@ -46,7 +46,6 @@ urlpatterns = [
 
     path('about_us/', wb.about, name='about-us'),
 
-    path('restaurant/create/', wb.add_restaurant, name='restaurant'),
 
     path('accounts/login', wb.LoginView.as_view(), name='login'),
     path('accounts/signup', wb.register, name='signup'),

@@ -108,15 +108,6 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'html/signup.html', {'form': form})
 
-@login_required
-def add_restaurant(request):
-    form = RestaurantForm(request.POST or None)
-    if form.is_valid():
-        restaurant = form.save(commit=False)
-        restaurant.user = request.user # set the user field to the current user
-        restaurant.save()
-        return redirect('restaurant_list', pk=restaurant.pk)
-    return render(request, 'html/add_restaurant.html', {'form': form})
 
 def restaurant_list(request):
     restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos
