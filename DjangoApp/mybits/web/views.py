@@ -60,13 +60,13 @@ def create_order(request):
         
         order = Order()
 
-        return redirect('order_detail', order_id=order.id) 
+        return redirect('order_detail', order_id=order.id)
     else:
         return render(request, 'html/create_order.html')
 
 def booking_restaurant(request):
     if request.method == 'POST':
-        date_order = request.POST.get('fecha')
+        date_order = request.POST.get('date')
         num_people = request.POST.get('num_people')
         id_client = request.user.id
         id_restaurant = request.POST.get('id_restaurant')
@@ -77,7 +77,7 @@ def booking_restaurant(request):
 
 
         # Redirigir al usuario a la página de detalle de la nueva orden
-        return redirect('order_detail', id_reservation=Reservation.id) 
+        return redirect('order_detail', id_reservation=Reservation.id)
     else:
         return render(request, 'html/booking.html',{"restaurants" : Restaurant.objects.all()})
 
