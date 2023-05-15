@@ -67,6 +67,8 @@ def booking_restaurant(request):
         num_people = request.POST.get('num_people')
         id_client = request.user.id
         id_restaurant = request.POST.get('id_restaurant')
+        id_client = request.user.id
+
         booking = Reservation(date=date_order, people_num=num_people, client_id=id_client, id_restaurant=id_restaurant)
         booking.save()
 
@@ -74,7 +76,7 @@ def booking_restaurant(request):
         # Redirigir al usuario a la página de detalle de la nueva orden
         return redirect('order_detail', id_reservation=Reservation.id) 
     else:
-        return render(request, 'html/booking.html')
+        return render(request, 'html/booking.html',{"restaurants" : Restaurant.objects.all()})
 
 
 #Orders
