@@ -33,7 +33,7 @@ urlpatterns = [
     path('client/', wb.client_list, name='client-list'),
     path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
-    path('reservation/', wb.reservation_list, name='reservation-list'),
+    path('reservation/', wb.reservation_list, name='reservations'),
     path('reservation/<int:id_book>/', wb.reservation_detail, name='reservation-detail'),
 
     path('order/', wb.order_list, name='order-list'),
@@ -51,8 +51,9 @@ urlpatterns = [
     path('accounts/login', wb.LoginView.as_view(), name='login'),
     path('accounts/signup', wb.register, name='signup'),
     path('accounts/logout', wb.LogoutView.as_view(), name='logout'),
-    
+
     path('order/create/', wb.create_order, name='order_create'),
+    path('book/create/', wb.booking_restaurant, name='book_create'),
 
 ]
 
