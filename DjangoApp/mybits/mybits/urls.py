@@ -49,6 +49,9 @@ urlpatterns = [
     path('book/create/', wb.booking_restaurant, name='book_create'),
     
     path('login/register/', wb.register, name='register_user'),
+    
+    path('logout/', wb.logoutPage, name='logout'),
+
 
 ]
 

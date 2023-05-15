@@ -15,6 +15,7 @@ from django.core.exceptions import ValidationError
 
 
 
+
 #Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
@@ -133,6 +134,7 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
 
 @login_required(login_url='login')
 def home(request):
