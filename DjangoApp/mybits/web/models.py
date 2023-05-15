@@ -13,7 +13,7 @@ class Restaurant(models.Model):
     
 class Menu(models.Model):
     id_menu = models.AutoField(primary_key=True, default=1)
-    descripcion_menu = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
     
 class Localization(models.Model):
