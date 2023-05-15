@@ -1,15 +1,8 @@
-from django.forms import ModelForm, Textarea, TextInput, FileInput
-from .models import Restaurant
-
-class RestaurantForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        visible = self.visible_fields()
-        for form in visible:
-            form.field.widget.attrs['class'] = 'form-control'
-            form.field.widget.attrs['autocomplete'] = 'off'
+from django import forms
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+class CreateUserForm(UserCreationForm):
     class Meta:
-        model = Restaurant
-        fields = '__all__'
-
-
+        model = User
+        fields = ["username","password"]

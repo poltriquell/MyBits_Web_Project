@@ -39,20 +39,16 @@ urlpatterns = [
     path('order/', wb.order_list, name='order-list'),
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
 
-    path('login/', wb.login, name='login-menu'),
-    path('login/register/', wb.register, name='register-menu'),
-
     path('admin/', admin.site.urls),
 
     path('about_us/', wb.about, name='about-us'),
+    path('login/', wb.loginPage, name='login'),
 
-
-    path('accounts/login', wb.LoginView.as_view(), name='login'),
-    path('accounts/signup', wb.register, name='signup'),
-    path('accounts/logout', wb.LogoutView.as_view(), name='logout'),
 
     path('order/create/', wb.create_order, name='order_create'),
     path('book/create/', wb.booking_restaurant, name='book_create'),
+    
+    path('login/register/', wb.register, name='register_user'),
 
 ]
 
