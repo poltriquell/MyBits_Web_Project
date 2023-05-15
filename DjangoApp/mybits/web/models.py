@@ -36,6 +36,7 @@ class Reservation(models.Model):
     people_num = models.IntegerField()
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    
 
 
 class Order(models.Model):

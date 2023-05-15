@@ -10,15 +10,11 @@
              <label for="people_num">Number of People:</label>
              <input type="text" class="form-control" name="people_num" required>
 
-
+        <!-- muestra en un menu desplegable todos los restaurantes, el que escoja el usuario es el que se le pasara -->
+        
         <div class="form-group">
             <label for="id_restaurant">Restaurant ID:</label>
-            <select class="form-control" name="id_restaurant" required>
-                {% for restaurant in restaurants %}
-                    <option value="{{ restaurant.id }}">{{ restaurant.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
+            <input type="number" class="form-control" name="id_restaurant" required>
 
 
         </div>
