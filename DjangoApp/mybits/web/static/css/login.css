@@ -1,0 +1,67 @@
+/* Estilos globales */
+body {
+    background-color: #f6f8fa;
+    color: #24292e;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 300px;
+    text-align: center;
+  }
+  
+  h2 {
+    color: #24292e;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  table {
+    margin-top: 10px;
+  }
+  
+  td {
+    padding: 5px;
+  }
+  
+  input[type="submit"] {
+    background-color: #238636;
+    border: none;
+    color: #c9d1d9;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Estilos para el tema oscuro */
+  input[type="text"],
+  input[type="password"] {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border: 1px solid #24292e;
+    padding: 5px;
+  }
+  
+  input[type="submit"] {
+    background-color: #238636;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #2ea043;
+  }
+  
+  /* Estilos para los mensajes de error */
+  p {
+    color: #f85149;
+    margin-bottom: 10px;
+  }
+  
