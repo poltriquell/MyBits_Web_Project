@@ -123,7 +123,6 @@ def restaurant_list(request):
     return render(request, 'html/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
 
 
-
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
