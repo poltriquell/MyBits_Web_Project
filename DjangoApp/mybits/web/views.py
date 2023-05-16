@@ -91,6 +91,20 @@ def booking_restaurant(request):
     else:
         return render(request, 'html/booking.html', {"restaurants": Restaurant.objects.all()})
 
+def delete_booking(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+
+    client = Client.objects.get(id_client=reservation.id_client_id) 
+    # Verificar si el usuario autenticado es el propietario de la reserva
+    if client.username != request.user.username:
+        # Si el usuario no es el propietario, mostrar un mensaje de error o redirigir a una página de acceso denegado
+        return redirect('access_denied')
+
+    # Si el usuario es el propietario, eliminar la reserva
+    reservation.delete()
+
+    # Redirigir al usuario a alguna página de confirmación o a otra vista relevante
+    return redirect('reservation_deleted')
 
 #Orders
 def order_list(request):
