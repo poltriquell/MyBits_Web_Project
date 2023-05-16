@@ -15,6 +15,7 @@ from django.core.exceptions import ValidationError
 
 
 
+
 #Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
@@ -67,20 +68,22 @@ def create_order(request):
 
 def booking_restaurant(request):
     if request.method == 'POST':
-        date_order = request.POST.get('date')
-        num_people = request.POST.get('num_people')
+        date_order = request.POST.get('fecha')
+        num_people = request.POST.get('people_num')
         id_client = request.user.id
         id_restaurant = request.POST.get('id_restaurant')
-        
 
-        booking = Reservation(date=date_order, people_num=num_people, client_id=id_client, id_restaurant=id_restaurant)
+        # Obtener instancias de Client y Restaurant basadas en las claves foráneas
+        client = get_object_or_404(Client, pk=1)
+        restaurant = get_object_or_404(Restaurant, pk=1)
+
+        booking = Reservation(date=date_order, people_num=num_people, id_client=client, id_restaurant=restaurant)
         booking.save()
 
-
         # Redirigir al usuario a la página de detalle de la nueva orden
-        return redirect('order_detail', id_reservation=Reservation.id)
+        return redirect('order_detail', id_reservation=booking.id_reservation)
     else:
-        return render(request, 'html/booking.html',{"restaurants" : Restaurant.objects.all()})
+        return render(request, 'html/booking.html', {"restaurants": Restaurant.objects.all()})
 
 
 #Orders
@@ -104,12 +107,12 @@ def restaurant_list(request):
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CreateUserForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
@@ -133,6 +136,7 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
 
 @login_required(login_url='login')
 def home(request):
