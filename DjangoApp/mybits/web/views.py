@@ -107,12 +107,12 @@ def restaurant_list(request):
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CreateUserForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 

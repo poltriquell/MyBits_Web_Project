@@ -11,16 +11,41 @@
       </h1>
       <p>Enter your details to create an account:</p>
       <form method="post">
-        {{ form.as_p }}
         {% csrf_token %}
+        
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <br>
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        <br>
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        <br>
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        <br>
+        {{ form.DNI_NIE.label_tag }}
+        {{ form.DNI_NIE }}
+        <br>
+        {{ form.address.label_tag }}
+        {{ form.address }}
+        <br>
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+        <br>
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        <br>
+        {{ form.card_number.label_tag }}
+        {{ form.card_number }}
+        <br>
+        
         <p><input type="submit" value="Create my account"></p>
       </form>
     </div>
   </div>
 {% endblock %}
-
-<link rel="stylesheet" type="text/css" href="../../static/css/signup.css">
-
 
 
 
