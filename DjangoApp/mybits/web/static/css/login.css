@@ -2,18 +2,18 @@
 body {
     background-color: #f6f8fa;
     color: #24292e;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    font-family: "Spline Sans", sans-serif;
   }
   
   .container {
     width: 300px;
-    text-align: center;
+  }
+
+  .module {
+    background-color: #ffffff;
+    border: 1px solid #e1e4e8;
+    padding: 20px;
+    margin-top: 20px;
   }
   
   h2 {
@@ -38,8 +38,6 @@ body {
     color: #c9d1d9;
     padding: 10px 20px;
     cursor: pointer;
-    display: block;
-    margin: 0 auto;
   }
   
   /* Estilos para el tema oscuro */

@@ -1,10 +1,9 @@
-
 {% block title %}
     Sign up
 {% endblock %}
 
 {% block content %}
-  <div class="module">  
+  <div class="module">
     <div class="container">
       <h1>
         Sign up
@@ -12,7 +11,7 @@
       <p>Enter your details to create an account:</p>
       <form method="post">
         {% csrf_token %}
-        
+
         {{ form.username.label_tag }}
         {{ form.username }}
         <br>
@@ -40,7 +39,7 @@
         {{ form.card_number.label_tag }}
         {{ form.card_number }}
         <br>
-        
+
         <p><input type="submit" value="Create my account"></p>
       </form>
     </div>
