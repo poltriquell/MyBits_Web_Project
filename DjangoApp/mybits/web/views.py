@@ -106,6 +106,7 @@ def delete_booking(request, reservation_id):
     # Redirigir al usuario a alguna página de confirmación o a otra vista relevante
     return redirect('reservation_deleted')
 
+
 #Orders
 def order_list(request):
     all_orders = Order.objects.all()

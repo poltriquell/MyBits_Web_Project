@@ -22,8 +22,8 @@ def populate_restaurants():
             'phone': '987654321',
             'email': 'restaurante2@example.com',
             'website': 'www.restaurante2.com',
-            'longitude': 41.9002,
-            'latitude': 0.9228
+            'longitude': 41.6020,
+            'latitude': 0.6228
         },
         {
             'name': 'Restaurante 3',
@@ -31,16 +31,17 @@ def populate_restaurants():
             'email': 'restaurante3@example.com',
             'website': 'www.restaurante3.com',
             'longitude': 42.6003,
-            'latitude': 0.8229
+            'latitude': 0.6509
         },
+        
         # Agrega aquí los demás restaurantes
         {
             'name': 'Restaurante 12',
             'phone': '753951456',
             'email': 'restaurante12@example.com',
             'website': 'www.restaurante12.com',
-            'longitude': 42.6011,
-            'latitude': 0.8237
+            'longitude': 42.6014,
+            'latitude': 0.6337
         }
     ]
     for restaurante in restaurantes:
