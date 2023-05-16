@@ -45,13 +45,7 @@ def client_detail(request, id_client):
     one_client = Client.objects.get(pk=id_client)
     return render(request, 'html/client.html', {"client" : one_client})
 
-#Reservations
-def reservation_list(request):
-    all_reservations = Reservation.objects.all()
-    return render(request, 'html/reservations.html', {"reservations" : all_reservations})
 
-def reservation_detail(request, id_book):
-    one_reservation = Reservation.objects.get(pk=id_book)
     return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
 def create_order(request):
@@ -66,32 +60,38 @@ def create_order(request):
     else:
         return render(request, 'html/create_order.html')
 
+@login_required(login_url='login')
 def booking_restaurant(request):
     if request.method == 'POST':
         date_order = request.POST.get('fecha')
         num_people = request.POST.get('people_num')
         user = request.user
-
-        try:
-            client = Client.objects.get(username=user.username)  # Buscar el cliente por su nombre de usuario
-        except Client.DoesNotExist:
-            # Si el cliente no está asignado, muestra un mensaje de error o realiza alguna acción adecuada
-            return render(request, 'html/error.html', {"message": "No se encontró el cliente correspondiente."})
+        client = Client.objects.get(username=user.username)  # Buscar el cliente por su nombre de usuario
 
         id_restaurant = request.POST.get('restaurant')  # Obtén el ID del restaurante seleccionado correctamente
 
         # Obtener la instancia de Restaurant basada en la clave foránea
         restaurant = get_object_or_404(Restaurant, pk=id_restaurant)
-
         booking = Reservation(date=date_order, people_num=num_people, id_client=client, id_restaurant=restaurant)
         booking.save()
-
         # Redirigir al usuario a la página de detalle de la nueva orden
-        return redirect('order_detail', id_reservation=booking.id_reservation)
+        return redirect('book_detail', id_reservation=booking.id_reservation)
     else:
         return render(request, 'html/booking.html', {"restaurants": Restaurant.objects.all()})
 
+@login_required(login_url='login')
+def booking_detail(request, id_reservation):
+    one_booking = Reservation.objects.get(pk=id_reservation)
+    client = Client.objects.get(id_client=one_booking.id_client_id) 
+    if client.username != request.user.username:
+        return redirect('access_denied')
+    else:
+        return render(request, 'html/booking_detail.html', {"booking" : one_booking})
+
+
+@login_required(login_url='login')
 def delete_booking(request, reservation_id):
+    
     reservation = get_object_or_404(Reservation, pk=reservation_id)
 
     client = Client.objects.get(id_client=reservation.id_client_id) 
@@ -102,9 +102,11 @@ def delete_booking(request, reservation_id):
 
     # Si el usuario es el propietario, eliminar la reserva
     reservation.delete()
-
+    
     # Redirigir al usuario a alguna página de confirmación o a otra vista relevante
-    return redirect('reservation_deleted')
+    return render(request, 'html/booking_deleted.html')     
+
+
 
 #Orders
 def order_list(request):
@@ -114,8 +116,6 @@ def order_list(request):
 def order_detail(request, id_order):
     one_order = Order.objects.get(pk=id_order)
     return render(request, 'html/order_info.html', {"order" : one_order})
-
-
 
 def restaurant_list(request):
     restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos

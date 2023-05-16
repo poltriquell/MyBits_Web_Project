@@ -33,11 +33,11 @@ urlpatterns = [
     path('client/', wb.client_list, name='client-list'),
     path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
-    path('reservation/', wb.reservation_list, name='reservations'),
-    path('reservation/<int:id_book>/', wb.reservation_detail, name='reservation-detail'),
+    
 
     path('order/', wb.order_list, name='order-list'),
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
+
 
     path('admin/', admin.site.urls),
 
@@ -46,7 +46,9 @@ urlpatterns = [
 
 
     path('order/create/', wb.create_order, name='order_create'),
+
     path('book/create/', wb.booking_restaurant, name='book_create'),
+    path('book/<int:id_reservation>/', wb.booking_detail, name='book_detail'),
     
     path('login/register/', wb.register, name='register_user'),
     
