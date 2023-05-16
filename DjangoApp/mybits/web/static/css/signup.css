@@ -7,6 +7,7 @@ body {
   
   h1 {
     color: #24292e;
+    font-family: "Spline Sans", sans-serif;
   }
   
   .module {
@@ -25,6 +26,7 @@ body {
   }
   
   input[type="submit"] {
+    font-family: "Spline Sans", sans-serif;
     background-color: #238636;
     border: none;
     color: #c9d1d9;
@@ -33,6 +35,7 @@ body {
   }
 
   input[type="submit"]:hover {
+    font-family: "Spline Sans", sans-serif;
     background-color: #2ea043;
   }
 
@@ -65,17 +68,20 @@ body {
 
   input[type="text"].dark-theme,
   input[type="password"].dark-theme {
+    font-family: "Spline Sans", sans-serif;
     background-color: #0d1117;
     color: #c9d1d9;
     border: 1px solid #30363d;
   }
 
   input[type="submit"].dark-theme {
+    font-family: "Spline Sans", sans-serif;
     background-color: #238636;
     color: #c9d1d9;
   }
 
   input[type="submit"].dark-theme:hover {
+    font-family: "Spline Sans", sans-serif;
     background-color: #2ea043;
   }
 

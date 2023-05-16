@@ -41,7 +41,7 @@ USER appuser
 ENV SECRET_KEY=$SECRET_KEY
 
 # Run the migrations
-RUN python3 fulldata.py
+RUN python3 data_fill.py
 RUN python3 manage.py makemigrations
 RUN python3 manage.py migrate
 
