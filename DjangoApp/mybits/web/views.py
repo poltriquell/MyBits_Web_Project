@@ -70,12 +70,18 @@ def booking_restaurant(request):
     if request.method == 'POST':
         date_order = request.POST.get('fecha')
         num_people = request.POST.get('people_num')
-        id_client = request.user.id
-        id_restaurant = request.POST.get('id_restaurant')
+        user = request.user
 
-        # Obtener instancias de Client y Restaurant basadas en las claves foráneas
-        client = get_object_or_404(Client, pk=1)
-        restaurant = get_object_or_404(Restaurant, pk=1)
+        try:
+            client = Client.objects.get(username=user.username)  # Buscar el cliente por su nombre de usuario
+        except Client.DoesNotExist:
+            # Si el cliente no está asignado, muestra un mensaje de error o realiza alguna acción adecuada
+            return render(request, 'html/error.html', {"message": "No se encontró el cliente correspondiente."})
+
+        id_restaurant = request.POST.get('restaurant')  # Obtén el ID del restaurante seleccionado correctamente
+
+        # Obtener la instancia de Restaurant basada en la clave foránea
+        restaurant = get_object_or_404(Restaurant, pk=id_restaurant)
 
         booking = Reservation(date=date_order, people_num=num_people, id_client=client, id_restaurant=restaurant)
         booking.save()

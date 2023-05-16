@@ -16,7 +16,7 @@
             <label for="restaurant">Restaurant:</label>
             <select name="restaurant" class="form-control">
                 {% for restaurant in restaurants %}
-                    <option value="{{ restaurant.id }}">{{ restaurant.name }}</option>
+                    <option value="{{ restaurant.id_restaurant }}">{{ restaurant.name }}</option>
                 {% endfor %}
             </select>
             

@@ -21,6 +21,7 @@ class CreateUserForm(UserCreationForm):
         if commit:
             user.save()
             client = Client.objects.create(
+                username=self.cleaned_data['username'],
                 name=self.cleaned_data['name'],
                 DNI_NIE=self.cleaned_data['DNI_NIE'],
                 address=self.cleaned_data['address'],
