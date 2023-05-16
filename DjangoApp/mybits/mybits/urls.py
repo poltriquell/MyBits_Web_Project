@@ -51,8 +51,7 @@ urlpatterns = [
     path('login/register/', wb.register, name='register_user'),
     
     path('logout/', wb.logoutPage, name='logout'),
-
-
+    path('reservations/<int:reservation_id>/delete/', wb.delete_booking, name='delete_reservation')
 ]
 
 # path('search/', search_bar, name='content_search'),
