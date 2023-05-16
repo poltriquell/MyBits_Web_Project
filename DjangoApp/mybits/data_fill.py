@@ -80,7 +80,13 @@ def populate_users():
             username=user['username'],
             password=user['password']
         )
-        
+
+def populate_super_user():
+        User.objects.create_superuser(
+            username='enric',
+            password='enric',
+            email='enric@admin.com'            
+        )  
 
 def populate_clients():
     clients = [
@@ -128,4 +134,5 @@ def populate_clients():
 if __name__ == '__main__':
     populate_restaurants()
     populate_users()
+    populate_super_user()
     populate_clients()
