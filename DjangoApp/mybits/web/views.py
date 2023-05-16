@@ -60,6 +60,16 @@ def create_order(request):
     else:
         return render(request, 'html/create_order.html')
 
+
+@login_required(login_url='login')
+def booking_detail(request, id_reservation):
+    one_booking = Reservation.objects.get(pk=id_reservation)
+    client = Client.objects.get(id_client=one_booking.id_client_id) 
+    if client.username != request.user.username:
+        return redirect('access_denied')
+    else:
+        return render(request, 'html/booking_detail.html', {"booking" : one_booking})
+
 @login_required(login_url='login')
 def booking_restaurant(request):
     if request.method == 'POST':
@@ -79,20 +89,11 @@ def booking_restaurant(request):
     else:
         return render(request, 'html/booking.html', {"restaurants": Restaurant.objects.all()})
 
-@login_required(login_url='login')
-def booking_detail(request, id_reservation):
-    one_booking = Reservation.objects.get(pk=id_reservation)
-    client = Client.objects.get(id_client=one_booking.id_client_id) 
-    if client.username != request.user.username:
-        return redirect('access_denied')
-    else:
-        return render(request, 'html/booking_detail.html', {"booking" : one_booking})
-
 
 @login_required(login_url='login')
-def delete_booking(request, reservation_id):
+def delete_booking(request, id_reservation):
     
-    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    reservation = get_object_or_404(Reservation, pk=id_reservation)
 
     client = Client.objects.get(id_client=reservation.id_client_id) 
     # Verificar si el usuario autenticado es el propietario de la reserva
@@ -107,6 +108,10 @@ def delete_booking(request, reservation_id):
     return render(request, 'html/booking_deleted.html')     
 
 
+
+def access_denied(request):
+    return render(request, 'html/access_denied.html')
+    
 
 #Orders
 def order_list(request):

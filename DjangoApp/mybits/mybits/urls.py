@@ -44,16 +44,15 @@ urlpatterns = [
     path('about_us/', wb.about, name='about-us'),
     path('login/', wb.loginPage, name='login'),
 
-
     path('order/create/', wb.create_order, name='order_create'),
 
     path('book/create/', wb.booking_restaurant, name='book_create'),
     path('book/<int:id_reservation>/', wb.booking_detail, name='book_detail'),
-    
+    path('book/error', wb.access_denied, name='access_denied'),
+    path('book/<int:id_reservation>/delete/', wb.delete_booking, name='book_delete'),
+
     path('login/register/', wb.register, name='register_user'),
-    
     path('logout/', wb.logoutPage, name='logout'),
-    path('reservations/<int:reservation_id>/delete/', wb.delete_booking, name='delete_reservation')
 ]
 
 # path('search/', search_bar, name='content_search'),
