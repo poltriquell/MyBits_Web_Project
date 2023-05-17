@@ -108,6 +108,27 @@ def delete_booking(request, id_reservation):
     return render(request, 'html/booking_deleted.html')     
 
 
+def update_booking(request, id_reservation):
+    if request.method == 'POST':
+        reservation = get_object_or_404(Reservation, pk=id_reservation)
+        client = Client.objects.get(id_client=reservation.id_client_id)
+        if client.username != request.user.username:
+            return redirect('access_denied')
+        date_order = request.POST.get('fecha')
+        num_people = request.POST.get('people_num')
+        if not date_order:  # check if date_order is empty or None
+            return render(request, 'html/booking_update.html', {"reservation": reservation, "error_message": "Date field is required."})
+        reservation.date = date_order
+        reservation.people_num = num_people
+        reservation.save()
+        return redirect('book_detail', id_reservation=reservation.id_reservation)
+    else:
+        reservation = get_object_or_404(Reservation, pk=id_reservation)
+        return render(request, 'html/booking_update.html', {"reservation": reservation})
+
+    
+    
+    
 
 def access_denied(request):
     return render(request, 'html/access_denied.html')
@@ -129,7 +150,7 @@ def restaurant_list(request):
 
 
 @csrf_exempt
-def register(request):
+def register_page(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -141,7 +162,7 @@ def register(request):
 
 
 @csrf_exempt
-def loginPage(request):
+def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password =request.POST.get('password')
@@ -157,7 +178,7 @@ def loginPage(request):
     return render(request, 'registration/login.html', context)
 
 
-def logoutPage(request):
+def logout_page(request):
     logout(request)
     return redirect('login')
 

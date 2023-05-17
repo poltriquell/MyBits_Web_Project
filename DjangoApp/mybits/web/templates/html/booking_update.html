@@ -1,0 +1,18 @@
+{% block content %}
+    <h1>Update reservation in Restaurant: </h1>
+    {{reservation.id_restaurant.name}}
+    {{reservation.id_client.name}}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="fecha">Date:</label>
+            <input type="date" class="form-control" name="fecha" required>
+
+        <div class="form-group">
+             <label for="people_num">Number of People:</label>
+             <input type="text" class="form-control" name="people_num" required>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock %}

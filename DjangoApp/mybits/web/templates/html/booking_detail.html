@@ -15,5 +15,10 @@
         <button type="submit">Delete Reservation</button>
     </form>
 
+    <form action="{% url 'book_update' id_reservation=booking.id_reservation %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Modify Reservation</button>
+    </form>
+
 </body>
 </html>
