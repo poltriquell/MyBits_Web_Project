@@ -33,7 +33,7 @@ class Client(models.Model):
 
 class Reservation(models.Model):
     id_reservation = models.AutoField(primary_key=True)
-    date = models.DateField()
+    date = models.DateTimeField()
     people_num = models.IntegerField()
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
