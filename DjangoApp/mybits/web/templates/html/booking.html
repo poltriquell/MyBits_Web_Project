@@ -3,9 +3,29 @@
     <form method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <label for="fecha">Date:</label>
-            <input type="datetime-local" class="form-control" name="fecha" required>
-
+            <label for="fecha">Fecha:</label>
+            <input type="datetime-local" class="form-control" name="fecha" id="fecha" required>
+            <span id="fecha-error" style="color: red;"></span>
+          </div>
+          
+          <script>
+            var fechaInput = document.getElementById('fecha');
+            var fechaError = document.getElementById('fecha-error');
+          
+            fechaInput.addEventListener('input', function() {
+              var fechaSeleccionada = new Date(fechaInput.value);
+              var fechaActual = new Date();
+          
+              if (fechaSeleccionada <= fechaActual) {
+                fechaError.textContent = 'La fecha debe ser superior a la fecha actual.';
+                fechaInput.setCustomValidity('La fecha debe ser superior a la fecha actual.');
+              } else {
+                fechaError.textContent = '';
+                fechaInput.setCustomValidity('');
+              }
+            });
+          </script>
+          
         <div class="form-group">
              <label for="people_num">Number of People:</label>
              <input type="text" class="form-control" name="people_num" required>
