@@ -1,0 +1,54 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+  <html lang="es">
+
+    <h1>Create a new order</h1>
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="datetime-local" class="form-control" name="fecha" id="fecha" required>
+            <span id="fecha-error" style="color: red;"></span>
+          </div>
+          
+          <script>
+            var fechaInput = document.getElementById('fecha');
+            var fechaError = document.getElementById('fecha-error');
+          
+            fechaInput.addEventListener('input', function() {
+              var fechaSeleccionada = new Date(fechaInput.value);
+              var fechaActual = new Date();
+          
+              if (fechaSeleccionada <= fechaActual) {
+                fechaError.textContent = 'La fecha debe ser superior a la fecha actual.';
+                fechaInput.setCustomValidity('La fecha debe ser superior a la fecha actual.');
+              } else {
+                fechaError.textContent = '';
+                fechaInput.setCustomValidity('');
+              }
+            });
+          </script>
+          
+        <div class="form-group">
+             <label for="people_num">Number of People:</label>
+             <input type="text" class="form-control" name="people_num" required>
+
+        <!-- muestra en un menu desplegable todos los restaurantes, el que escoja el usuario es el que se le pasara -->
+        
+        <div class="form-group">
+            <label for="restaurant">Restaurant:</label>
+            <select name="restaurant" class="form-control">
+                {% for restaurant in restaurants %}
+                    <option value="{{ restaurant.id_restaurant }}">{{ restaurant.name }}</option>
+                {% endfor %}
+            </select>
+            
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock %}

@@ -8,7 +8,7 @@
       margin-top: 80px;
     }
   </style>
-  <title>My Bits - Bootstrap Landing Page</title>
+  <title>My Bits Project Home Page</title>
   <!-- Boostrap Css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -35,12 +35,19 @@
     
   </style>
 
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar">
-
   <!-- Navbar -->
-  <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">MyBits</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,29 +61,26 @@
           <li class="nav-item">
             <a class="nav-link" href="about_us/"> About Us </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link disabled" href="reservation/"> Reservation </a>
+            <a class="nav-link" href="book/mybooks/"> My bookings </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#features"> Features </a>
-          </li>
+
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-but">
-            <a class="btn btn-outline-light" href="accounts/signup"> Sign Up </a>
+            <a id="booking-button" class="btn btn-outline-light" href="book/create/"> Booking Restaurant </a>
           </li>
           <li class="nav-but">
-            <a class="btn btn-outline-light" href="accounts/login"> Log In </a>
+            <a class="btn btn-outline-light" href="logout/"> Log Out </a>
           </li>
+          
         </ul>
       </div>
     </div>
   </nav>
   
-  
 
-
-  
   <!-- Map API -->
   <div id="map"></div>
 
@@ -86,7 +90,8 @@
         {
             'type': 'Feature',
             'properties': {
-                'description': '<strong>{{restaurant.name}}</strong><p>Telefono:{{restaurant.phone }}</p><p>Mail:{{restaurant.email }}</p><p>Web:{{restaurant.website }}</p><p>{{ restaurant.menu_url }}</p>'
+              'description': '<strong>{{restaurant.name}}</strong><p>Telefono:{{restaurant.phone }}</p><p>Mail:{{restaurant.email }}</p><p>Web:{{restaurant.website }}</p><a href="/restaurant/{{restaurant.id_restaurant}}/">Ver más</a>'
+
             },
             'geometry': {
                 'type': 'Point',
@@ -187,33 +192,29 @@
     });
 </script>
 
-
-  <!-- label search-->
-
-
-  
-
-  <!-- LIST -->
 <main>
-    <section>
-      <h1>Nuestros restaurantes </h1>
-      <h2>La selección de los mejores restaurantes en todo el mundo. </h2>
+  <section>
+      <h1>Nuestros restaurantes</h1>
+      <h2>La selección de los mejores restaurantes en todo el mundo.</h2>
       {% if restaurants %}
-        <ul>
-        {% for restaurant in restaurants %}
-            <li><h3>{{ restaurant.name }}</h3></li>
-            {{ restaurant.phone }}
-            {{ restaurant.email }}
-            {{ restaurant.website }}
-            <p></p>
-        {% endfor %}
-        </ul>
+          <ul class="restaurant-list">
+              {% for restaurant in restaurants %}
+                  <li>
+                      <div class="restaurant-box">
+                          <h3><a href="/restaurant/{{ restaurant.id_restaurant }}/">{{ restaurant.name }}</a></h3>
+                          <p>Telefono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
+                          <p>Mail: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
+                          <p>Web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
+                      </div>
+                  </li>
+              {% endfor %}
+          </ul>
       {% else %}
-        <p>No registered restaurants</p>
+          <p>No hay restaurantes registrados.</p>
       {% endif %}
-    </section>
-  </main>
-  
+  </section>
+</main>
+
 
 
 

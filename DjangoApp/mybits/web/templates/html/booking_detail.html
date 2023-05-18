@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends './base.html' %}
+{% block content %}
+<html>
+<head>
+    <title>Booking Detail</title>
+</head>
+<body>
+    <p><strong>Restaurant:</strong> {{ booking.id_restaurant.name }}</p>
+    <p><strong>Date:</strong> {{ booking.date }}</p>
+    <p><strong>People Number:</strong> {{ booking.people_num }}</p>
+
+    <!-- Button for deleting the reservation -->
+    <form action="{% url 'book_delete' id_reservation=booking.id_reservation %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete Reservation</button>
+    </form>
+
+    <form action="{% url 'book_update' id_reservation=booking.id_reservation %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Modify Reservation</button>
+    </form>
+
+</body>
+</html>
+{% endblock %}

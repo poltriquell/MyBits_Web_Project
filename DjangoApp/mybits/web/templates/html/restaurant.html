@@ -1,28 +1,52 @@
 <html lang="en">
+
+{% extends './base.html' %}
+
+{% block content %}
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Display a popup on hover</title>
+<title>{{restaurant.name}}</title>
 <script src="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.umd.js"></script>
 <link href="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/style.css">
+
+<!-- Vendor CSS Files -->
+<!-- Boostrap Css -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+<!-- Remix Icons -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+<!-- Style Css -->
+<link rel="stylesheet" href="../../static/css/style.css">
+<link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <style>
   body {margin: 0; padding: 0;}
-  #map {position: absolute; top: 0; bottom: 0; width: 100%;height: 400px;}
+  #map { position: relative; height:900px; width: 100%; 
+
+  .restaurant-info { margin-top: 20px; }
+  .separator { border-top: 1px solid #ccc; margin: 20px 0; }
 </style>
 </head>
 <body>
-<style>
-  .mapboxgl-popup {
-    max-width: 400px;
-    font: 12px/20px 'Spline Sans', sans-serif;
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:static;
-    height:0;
-  }
-</style>
+<div class="restaurant-info">
+    <h1>{{ restaurant.name }}</h1>
+    <p>Teléfono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
+    <p>Correo electrónico: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
+    <p>Página web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
+</div>
+
+<div class="separator"></div>
+
 <div id="map"></div>
+
 <script>
     var longitude = {{restaurant.longitude}}
     var latitude = {{restaurant.latitude}}
@@ -30,8 +54,10 @@
     var map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.STREETS,
-        center: [latitude, longitude],
-        zoom: 7
+        geolocate: maptilersdk.GeolocationType.POINT,
+        terrain:true,
+        showUserLocation:true
+
     });
 
     map.on('load', function () {
@@ -41,6 +67,9 @@
             function (error, image) {
                 if (error) throw error;
                 map.addImage('custom-marker', image);
+                map.scrollZoom.disable();
+                map.boxZoom.disable();
+                map.addControl(new maptilersdk.FullscreenControl({container: document.querySelector('body')}));
                 
     
                 map.addSource('places', {
@@ -52,7 +81,7 @@
                                 'type': 'Feature',
                                 'properties': {
                                     'description':
-                                        '<strong>{{restaurant.name}}O</strong><p>{{restaurant.phone}}</p><p>{{restaurant.email}}</p><p>{{restaurant.website}}</p><p>{{restaurant.menu_url}}</p>'
+                                    '<strong>{{ restaurant.name }}</strong><p>Telefono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p><p>Email: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p><p>Web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p><p>Dirección: {{ restaurant.latitude }}, {{ restaurant.longitude }}</p>'
                                 },
                                 'geometry': {
                                     'type': 'Point',
@@ -104,9 +133,9 @@
 
         map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
-            popup.remove();
         });
     });
 </script>
 </body>
 </html>
+{% endblock %}
