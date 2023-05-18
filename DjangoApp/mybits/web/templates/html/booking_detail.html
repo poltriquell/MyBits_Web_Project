@@ -7,7 +7,6 @@
     <p><strong>Restaurant:</strong> {{ booking.id_restaurant.name }}</p>
     <p><strong>Date:</strong> {{ booking.date }}</p>
     <p><strong>People Number:</strong> {{ booking.people_num }}</p>
-    <p><strong>Client:</strong> {{ booking.id_client.name }}</p>
 
     <!-- Button for deleting the reservation -->
     <form action="{% url 'book_delete' id_reservation=booking.id_reservation %}" method="post">

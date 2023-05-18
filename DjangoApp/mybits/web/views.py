@@ -90,6 +90,8 @@ def booking_restaurant(request):
         return render(request, 'html/booking.html', {"restaurants": Restaurant.objects.all()})
 
 
+    
+
 @login_required(login_url='login')
 def delete_booking(request, id_reservation):
     
@@ -108,6 +110,7 @@ def delete_booking(request, id_reservation):
     return render(request, 'html/booking_deleted.html')     
 
 
+@login_required(login_url='login')
 def update_booking(request, id_reservation):
     if request.method == 'POST':
         reservation = get_object_or_404(Reservation, pk=id_reservation)
@@ -126,7 +129,22 @@ def update_booking(request, id_reservation):
         reservation = get_object_or_404(Reservation, pk=id_reservation)
         return render(request, 'html/booking_update.html', {"reservation": reservation})
 
+
+
+@login_required(login_url='login')
+def user_bookings(request):
     
+    
+    
+    user = request.user
+    client = Client.objects.get(username=user.username)  # Obtén el cliente basado en el nombre de usuario
+    if client.username != user.username:
+            return redirect('access_denied')
+    # Obtén todas las reservas del cliente actual
+    bookings = Reservation.objects.filter(id_client=client)
+
+    return render(request, 'html/user_bookings.html', {"bookings": bookings})
+
     
     
 
