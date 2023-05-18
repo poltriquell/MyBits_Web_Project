@@ -35,9 +35,8 @@ def step_then_i_should_be_on_the_home_page(context):
 
 @then('I click the "Booking Restaurant" link in the navbar')
 def step_then_i_click_booking_link(context):
-    WebDriverWait(context.browser, 10).until(
-        EC.visibility_of_element_located((By.ID, 'booking-button'))
-    )
+    wait = WebDriverWait(context.browser, 10)
+    booking_link = wait.until(EC.visibility_of_element_located((By.ID, 'booking-button')))
     booking_link = context.browser.find_element(By.ID, 'booking-button')
     context.browser.execute_script("arguments[0].click();", booking_link)
 
