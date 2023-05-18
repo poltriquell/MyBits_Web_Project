@@ -1,4 +1,8 @@
 <html lang="en">
+
+{% extends './base.html' %}
+
+{% block content %}
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,35 +36,12 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 </style>
 </head>
 <body>
-
-<body data-bs-spy="scroll" data-bs-target=".navbar">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">MyBits</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-</body>
-    
-
 <div class="restaurant-info">
     <h1>{{ restaurant.name }}</h1>
     <p>Teléfono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
     <p>Correo electrónico: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
     <p>Página web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
 </div>
-
-
-
 
 <div class="separator"></div>
 
@@ -157,3 +138,4 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 </script>
 </body>
 </html>
+{% endblock %}
