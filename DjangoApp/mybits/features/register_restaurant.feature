@@ -10,7 +10,7 @@ Feature: Login and Booking
     Given I am on the login page
     When I enter my username "ElQuique" and password "hola12345" and click the login button
     Then I should be on the home page
-    # And I click the "Booking Restaurant" link in the navbar
+    Then I click the "Booking Restaurant" link in the navbar
     # And I select "2023-05-23" from the date dropdown
     # And I select "19:00" from the time dropdown
     # And I fill out the booking form with the following details:

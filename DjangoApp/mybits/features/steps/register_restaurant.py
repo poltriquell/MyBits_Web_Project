@@ -1,8 +1,5 @@
 from behave import given, when, then
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -20,10 +17,6 @@ def step_given_i_am_on_the_login_page(context):
     login_url = 'http://localhost:8000/login/?next=/'
     context.browser.get(login_url)
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 @when('I enter my username "{username}" and password "{password}" and click the login button')
 def step_when_i_enter_username_and_password(context, username, password):
     wait = WebDriverWait(context.browser, 10)  # Espera hasta 10 segundos
@@ -40,11 +33,13 @@ def step_then_i_should_be_on_the_home_page(context):
     actual_title = context.browser.title
     assert expected_title == actual_title, f"Expected title: {expected_title}, Actual title: {actual_title}"
 
-
-# @then('I click the "Booking Restaurant" link in the navbar')
-# def step_then_i_click_booking_link(context):
-#     booking_link = context.driver.find_element_by_link_text('Booking Restaurant')
-#     booking_link.click()
+@then('I click the "Booking Restaurant" link in the navbar')
+def step_then_i_click_booking_link(context):
+    WebDriverWait(context.browser, 10).until(
+        EC.visibility_of_element_located((By.ID, 'booking-button'))
+    )
+    booking_link = context.browser.find_element(By.ID, 'booking-button')
+    context.browser.execute_script("arguments[0].click();", booking_link)
 
 # @then('I select "{date}" from the date dropdown')
 # def step_then_i_select_date(context, date):
