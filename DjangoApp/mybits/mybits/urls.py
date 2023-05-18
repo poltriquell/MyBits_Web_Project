@@ -33,7 +33,8 @@ urlpatterns = [
     path('client/', wb.client_list, name='client-list'),
     path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
-    
+    path('book/mybooks/', wb.user_bookings, name='user_bookings'),
+
 
     path('order/', wb.order_list, name='order-list'),
     path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
