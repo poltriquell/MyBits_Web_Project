@@ -1,35 +1,24 @@
-Feature: Register Restaurant
-  In order to keep track of the restaurants I visit
-  As a user
-  I want to register a restaurant together with its location and contact details
+Feature: Login and Booking
+  In order to make a restaurant booking
+  As a registered user
+  I want to log in and fill out the booking form
 
-  Background: There is a registered user
-    Given Exists a user "user" with password "password"
+  Background:
+    Given there is a registered user with username "ElQuique" and password "hola12345"
 
-  Scenario: Register just restaurant name
-    Given I login as user "user" with password "webproject"
-    When I register restaurant
-      | name        |
-      | The Tavern  |
-    Then I'm viewing the details page for restaurant by "user"
-      | name        |
-      | The Tavern  |
-    And There are 1 restaurants
-
-  Scenario: Register just restaurant name and city
-    Given I login as user "user" with password "webproject"
-    When I register restaurant
-      | name        | city      | country   |
-      | The Tavern  | London    | England   |
-    Then I'm viewing the details page for restaurant by "user"
-      | name        | city      | country   |
-      | The Tavern  | London    | England   |
-    And There are 1 restaurants
-
-  Scenario: Try to register restaurant but not logged in
-    Given I'm not logged in
-    When I register restaurant
-      | name        |
-      | The Tavern  |
-    Then I'm redirected to the login form
-    And There are 0 restaurants
+  Scenario: Log in and make a restaurant booking
+    Given I am on the login page
+    When I enter my username "ElQuique" and password "hola12345" and click the login button
+    Then I should be on the home page
+    # And I click the "Booking Restaurant" link in the navbar
+    # And I select "2023-05-23" from the date dropdown
+    # And I select "19:00" from the time dropdown
+    # And I fill out the booking form with the following details:
+    #   | Guests |
+    #   | 4      |
+    # And I select "Restaurante vegano de Pol Triquel" from the restaurant dropdown
+    # And I click the "Create" button
+    # Then I should see the booking page
+    # And I should see the following details:
+    #   | Restaurant                         | Date                 | People Number  | Client         |
+    #   | Restaurante vegano de Pol Triquell | May 23, 2023, 7 p.m. |      4         | Don Enric      |
