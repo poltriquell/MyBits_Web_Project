@@ -50,8 +50,11 @@ def client_detail(request, id_client):
     return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
 
+@login_required(login_url='login')
 def order_detail(request, id_order):
     order = get_object_or_404(Order, pk=id_order)
+    if client.username != request.user.username:
+        return redirect('access_denied')
     return render(request, 'html/order_detail.html', {'order': order})
 
 
