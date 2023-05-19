@@ -28,26 +28,6 @@ def restaurant_detail(request, id_rest):
     context = {'restaurant': restaurant_dict}
     return render(request, 'html/restaurant.html', context)
 
-#Localizations
-def localization_list(request):
-    all_localizations = Localization.objects.all()
-    return render(request, 'html/localizations.html', {"localizations" : all_localizations})
-
-def localization_detail(request, id_loc):
-    one_localization = Localization.objects.get(pk=id_loc)
-    return render(request, 'html/localization.html', {"localization" : one_localization})
-
-#Clients
-def client_list(request):
-    all_clients = Client.objects.all()
-    return render(request, 'html/clients.html', {"clients" : all_clients})
-
-def client_detail(request, id_client):
-    one_client = Client.objects.get(pk=id_client)
-    return render(request, 'html/client.html', {"client" : one_client})
-
-
-    return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
 
 @login_required(login_url='login')
@@ -172,9 +152,6 @@ def user_bookings(request):
     return render(request, 'html/user_bookings.html', {"bookings": bookings})
 
 
-
-    
-
 def access_denied(request):
     return render(request, 'html/access_denied.html')
     
@@ -192,12 +169,6 @@ def user_orders(request):
 
     return render(request, 'html/user_orders.html', {'orders': orders})
 
-
-
-def restaurant_list(request):
-    restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos
-    context = {'restaurants': restaurants} # crea un diccionario de contexto que contiene la lista de restaurantes
-    return render(request, 'html/restaurant_list.html', context) # renderiza la plantilla restaurant_list.html con el diccionario de contexto
 
 
 @csrf_exempt

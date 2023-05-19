@@ -27,11 +27,10 @@ from django.conf import settings
 urlpatterns = [
     path('', wb.home, name='home'),
 
-    path('restaurant/', wb.restaurant_list, name='restaurant-list'),
     path('restaurant/<int:id_rest>/', wb.restaurant_detail, name='restaurant-detail'),
 
-    path('client/', wb.client_list, name='client-list'),
-    path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
+    #path('client/', wb.client_list, name='client-list'),
+    #path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
     path('book/mybooks/', wb.user_bookings, name='user_bookings'),
     path('order/myorders/', wb.user_orders, name='user_bookings'),
@@ -39,10 +38,6 @@ urlpatterns = [
 
     path('order/create/', wb.create_order, name='order_create'),
     path('order/<int:id_order>/', wb.order_detail, name='order_detail'),
-
-    
-
-
 
     path('admin/', admin.site.urls),
 
