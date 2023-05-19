@@ -53,7 +53,8 @@ def client_detail(request, id_client):
 @login_required(login_url='login')
 def order_detail(request, id_order):
     order = get_object_or_404(Order, pk=id_order)
-    client = Client.objects.get(id_client=one_booking.id_client_id) 
+    client = Client.objects.get(username=user.username)  # Find the client by their username
+
 
     if client.username != request.user.username:
         return redirect('access_denied')
