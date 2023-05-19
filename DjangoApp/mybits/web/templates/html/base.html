@@ -7,7 +7,6 @@
   <style>
     body {
       margin-top: 80px;
-      
     }
   </style>
   <title>My Bits Project Home Page</title>
@@ -64,7 +63,7 @@
             <a class="btn btn-outline-light" href="{% url 'order_create' %}"> Create Order </a>
           </li>
           <li class="nav-but">
-            <a class="btn btn-outline-light" href="{% url 'logout' %}/"> Log Out </a>
+            <a class="btn btn-outline-light" href="{% url 'logout' %}"> Log Out </a>
           </li>
           
         </ul>
@@ -75,6 +74,7 @@
 
   <!-- Aquí irá el contenido específico de cada página -->
   {% block content %}
+  
 
   {% endblock %}
 

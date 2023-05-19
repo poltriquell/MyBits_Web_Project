@@ -1,6 +1,8 @@
 {% extends './base.html' %}
 
 {% block content %}
+<div style="margin: 0 20px;">
+
     <h1>Update reservation in Restaurant: </h1>
     {{reservation.id_restaurant.name}}
     {{reservation.id_client.name}}
@@ -17,4 +19,6 @@
 
         <button type="submit" class="btn btn-primary">Modify</button>
     </form>
+</div>
+
 {% endblock %}
