@@ -33,7 +33,7 @@ urlpatterns = [
     #path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
     path('book/mybooks/', wb.user_bookings, name='user_bookings'),
-    path('order/myorders/', wb.user_orders, name='user_bookings'),
+    path('order/myorders/', wb.user_orders, name='user_orders'),
 
 
     path('order/create/', wb.create_order, name='order_create'),
