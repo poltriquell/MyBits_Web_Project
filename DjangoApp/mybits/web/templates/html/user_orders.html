@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Orders</title>
-</head>
-<body>
+{% extends './base.html' %}
+
+{% block content %}
     <h1>User Orders</h1>
     {% if orders %}
         <ul>
@@ -17,5 +14,4 @@
     {% else %}
         <p>No orders available.</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

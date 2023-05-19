@@ -1,40 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Order</title>
-    <style>
-        .product {
-            display: none;
-        }
-    </style>
-    <script>
-        // Función para mostrar solo los productos del restaurante seleccionado
-        function showProducts() {
-            var restaurantSelect = document.getElementById("restaurant");
-            var selectedRestaurantId = restaurantSelect.value;
-            var products = document.getElementsByClassName("product");
+{% extends './base.html' %}
 
-            // Ocultar todos los productos
-            for (var i = 0; i < products.length; i++) {
-                products[i].style.display = "none";
-            }
-
-            // Mostrar solo los productos del restaurante seleccionado
-            var selectedProducts = document.getElementsByClassName("restaurant-" + selectedRestaurantId);
-            for (var j = 0; j < selectedProducts.length; j++) {
-                selectedProducts[j].style.display = "block";
-            }
-        }
-
-        // Mostrar los productos del primer restaurante al cargar la página
-        window.addEventListener("DOMContentLoaded", function() {
-            showProducts();
-        });
-    </script>
-
-    
-</head>
-<body>
+{% block content %}
     <h1>Add Order</h1>
     <form method="post">
         {% csrf_token %}
@@ -59,5 +25,29 @@
         {% endfor %}
         <input type="submit" value="Add Order">
     </form>
-</body>
-</html>
+    
+    <script>
+        // Función para mostrar solo los productos del restaurante seleccionado
+        function showProducts() {
+            var restaurantSelect = document.getElementById("restaurant");
+            var selectedRestaurantId = restaurantSelect.value;
+            var products = document.getElementsByClassName("product");
+
+            // Ocultar todos los productos
+            for (var i = 0; i < products.length; i++) {
+                products[i].style.display = "none";
+            }
+
+            // Mostrar solo los productos del restaurante seleccionado
+            var selectedProducts = document.getElementsByClassName("restaurant-" + selectedRestaurantId);
+            for (var j = 0; j < selectedProducts.length; j++) {
+                selectedProducts[j].style.display = "block";
+            }
+        }
+
+        // Mostrar los productos del primer restaurante al cargar la página
+        window.addEventListener("DOMContentLoaded", function() {
+            showProducts();
+        });
+    </script>
+{% endblock %}

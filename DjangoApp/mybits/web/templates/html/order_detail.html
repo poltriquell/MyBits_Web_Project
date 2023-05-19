@@ -1,10 +1,6 @@
-<!DOCTYPE html>
+{% extends './base.html' %}
 
-<html>
-<head>
-    <title>Order Detail</title>
-</head>
-<body>
+{% block content %}
     <h1>Order Detail</h1>
     <h2>Order ID: {{ order.id_order }}</h2>
     <p>Date: {{ order.date }}</p>
@@ -16,5 +12,4 @@
         <li>{{ order_item.id_producto.name }} - Quantity: {{ order_item.quantity }} Price: {{ order_item.id_producto.price }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
