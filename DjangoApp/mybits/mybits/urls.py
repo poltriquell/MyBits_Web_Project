@@ -34,16 +34,14 @@ urlpatterns = [
     path('client/<int:id_client>/', wb.client_detail, name='client-detail'),
 
     path('book/mybooks/', wb.user_bookings, name='user_bookings'),
+    path('order/myorders/', wb.user_orders, name='user_bookings'),
 
 
-    path('order/', wb.order_list, name='order-list'),
-    
-    
     path('order/create/', wb.create_order, name='order_create'),
-
     path('order/<int:id_order>/', wb.order_detail, name='order_detail'),
 
     
+
 
 
     path('admin/', admin.site.urls),

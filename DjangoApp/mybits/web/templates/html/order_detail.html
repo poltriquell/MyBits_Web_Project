@@ -12,7 +12,7 @@
     <h3>Order Items:</h3>
     <ul>
         {% for order_item in order.orderitem_set.all %}
-        <li>{{ order_item.id_producto.name }} - Quantity: {{ order_item.quantity }}</li>
+        <li>{{ order_item.id_producto.name }} - Quantity: {{ order_item.quantity }} Price: {{ order_item.id_producto.price }}</li>
         {% endfor %}
     </ul>
 </body>

@@ -80,6 +80,8 @@ def create_order(request):
             quantity = request.POST.get(f'quantity_{product_id}')
             order_item = OrderItem(order=order, id_producto=product, quantity=quantity)
             order_item.save()
+            
+    
 
         # Redirect the user to the order detail page
         return redirect('order_detail', id_order=order.id_order)
@@ -172,17 +174,23 @@ def user_bookings(request):
 
 
     
-    
 
 def access_denied(request):
     return render(request, 'html/access_denied.html')
     
 
-#Orders
-def order_list(request):
-    all_orders = Order.objects.all()
-    return render(request, 'html/orders_list.html', {"orders" : all_orders})
 
+@login_required(login_url='login')
+def user_orders(request):
+    # Obtener todos los pedidos del usuario actualmente autenticado
+    user = request.user
+    client = Client.objects.get(username=user.username)  # Obtén el cliente basado en el nombre de usuario
+    if client.username != user.username:
+            return redirect('access_denied')
+    
+    orders = Order.objects.filter(id_client=client)
+
+    return render(request, 'html/user_orders.html', {'orders': orders})
 
 
 

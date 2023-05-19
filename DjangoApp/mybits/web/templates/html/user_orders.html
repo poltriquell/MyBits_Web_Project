@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Orders</title>
+</head>
+<body>
+    <h1>User Orders</h1>
+    {% if orders %}
+        <ul>
+            {% for order in orders %}
+                <li>
+                    <a href="{% url 'order_detail' id_order=order.id_order %}">Order ID: {{ order.id_order }}</a>
+                    - Date: {{ order.date }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No orders available.</p>
+    {% endif %}
+</body>
+</html>

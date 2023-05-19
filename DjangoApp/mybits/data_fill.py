@@ -28,7 +28,9 @@ def populate_restaurants():
             'website': 'www.restaurantepol.lbb',
             'longitude': 41.5203322,
             'latitude': 0.8684098
-        }
+        },
+        
+        
     ]
     
     for restaurante in restaurantes:
