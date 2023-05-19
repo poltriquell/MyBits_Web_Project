@@ -3,7 +3,7 @@
 {% block content %}
 <main>
     <section>
-        <h1>Mis reservas</h1>
+        <h1>My bookings</h1>
         {% if bookings %}
             <ul>
                 {% for booking in bookings %}
@@ -26,7 +26,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No tienes reservas.</p>
+            <p>You don't have booking.</p>
         {% endif %}
     </section>
 </main>

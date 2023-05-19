@@ -201,15 +201,15 @@
 
 <main>
   <section>
-      <h1>Nuestros restaurantes</h1>
-      <h2>La selección de los mejores restaurantes en todo el mundo.</h2>
+      <h1>Our restaurants</h1>
+      <h2>A selection of the best restaurants in the world.</h2>
       {% if restaurants %}
           <ul class="restaurant-list">
               {% for restaurant in restaurants %}
                   <li>
                       <div class="restaurant-box">
                           <h3><a href="/restaurant/{{ restaurant.id_restaurant }}/">{{ restaurant.name }}</a></h3>
-                          <p>Telefono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
+                          <p>Phone: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
                           <p>Mail: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
                           <p>Web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
                       </div>
