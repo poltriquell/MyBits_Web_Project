@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Order</title>
+</head>
+<body>
+    <h1>Add Order</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="restaurant">Select Restaurant:</label>
+        <select name="restaurant" id="restaurant">
+            {% for restaurant in restaurants %}
+            <option value="{{ restaurant.id_restaurant }}">{{ restaurant.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="products">Select Products:</label>
+        <br>
+        {% for restaurant in restaurants %}
+        <h3>{{ restaurant.name }}</h3>
+        {% for product in restaurant.product_set.all %}
+        <input type="checkbox" name="products" value="{{ product.id_producto }}">{{ product.name }} - Price: {{ product.price }}€<br>
+        Quantity: <input type="number" name="quantity_{{ product.id_producto }}" value="1" min="1">
+        <br><br>
+        {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Add Order">
+    </form>
+</body>
+</html>

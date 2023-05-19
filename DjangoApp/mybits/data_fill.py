@@ -1,33 +1,15 @@
 import os
 import django
+import sqlite3
 
 # Configurar la configuración de Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mybits.settings')
-
 django.setup()
+
 from django.contrib.auth.models import User
 from web.models import *
 
-import sqlite3
 
-def clear_database():
-    conn = sqlite3.connect('db.sqlite3')
-    cursor = conn.cursor()
-
-    # Obtener una lista de tablas en la base de datos
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = cursor.fetchall()
-
-    # Eliminar los datos de todas las tablas
-    for table in tables:
-        table_name = table[0]
-        cursor.execute(f"DELETE FROM {table_name};")
-
-    # Confirmar los cambios y cerrar la conexión
-    conn.commit()
-    conn.close()
-
-    print("Contenido de la base de datos eliminado exitosamente.")
 
 def populate_restaurants():
     restaurantes = [
@@ -44,8 +26,8 @@ def populate_restaurants():
             'phone': '611111111',
             'email': 'reservas@veganotriquell.lbb',
             'website': 'www.restaurantepol.lbb',
-            'longitude': 41.5203322 ,
-            'latitude': 0.8684098 
+            'longitude': 41.5203322,
+            'latitude': 0.8684098
         }
     ]
     
@@ -59,19 +41,20 @@ def populate_restaurants():
             latitude=restaurante['latitude']
         )
 
+
 def populate_users():
     users = [
         {
-           'username' : 'Codeina',
-           'password' : 'hola12345'
+           'username': 'CodeinaUser',
+           'password': 'hola12345'
         },
         {
-           'username' : 'MarioBros',
-           'password' : 'hola12345'
+           'username': 'MarioBrosUser',
+           'password': 'hola12345'
         },
         {
-           'username' : 'ElQuique',
-           'password' : 'hola12345'
+           'username': 'ElQuiqueUser',
+           'password': 'hola12345'
         }
     ]
     
@@ -81,43 +64,44 @@ def populate_users():
             password=user['password']
         )
 
+
 def populate_super_user():
-        User.objects.create_superuser(
-            username='enric',
-            password='enric',
-            email='enric@admin.com'            
-        )  
+    User.objects.create_superuser(
+        username='enric',
+        password='hola12345',
+        email='enric@admin.com'
+    )  
+
 
 def populate_clients():
     clients = [
         {
-            'username' : 'Codeina',
+            'username': 'CodeinaUser',
             'name': 'Mr. Codina',
-            'DNI_NIE' : '44555666P',
-            'address' : 'Calle Rural',
-            'phone' : '622222222',
-            'email' : 'codina@gmail.com',
-            'card_number' : '0000111122223333'
+            'DNI_NIE': '44555666P',
+            'address': 'Calle Rural',
+            'phone': '622222222',
+            'email': 'codina@gmail.com',
+            'card_number': '0000111122223333'
         },
         {
-            'username' : 'MarioBros', 
+            'username': 'MarioBrosUser',
             'name': 'Lord Mario',
-            'DNI_NIE' : '77888999P',
-            'address' : 'Calle Afueras',
-            'phone' : '633333333',
-            'email' : 'mario@gmail.com', 
-            'card_number' : '4444555566667777'
+            'DNI_NIE': '77888999P',
+            'address': 'Calle Afueras',
+            'phone': '633333333',
+            'email': 'mario@gmail.com',
+            'card_number': '4444555566667777'
         },
         {
-            'username' : 'ElQuique', 
-            'name': 'Don Enric', 
-            'DNI_NIE' : '11222333P', 
-            'address' : 'Calle 11S', 
-            'phone' : '644444444', 
-            'email' : 'enric@gmail.com', 
-            'card_number' : '8888999900001111'
+            'username': 'ElQuiqueUser',
+            'name': 'Don Enric',
+            'DNI_NIE': '11222333P',
+            'address': 'Calle 11S',
+            'phone': '644444444',
+            'email': 'enric@gmail.com',
+            'card_number': '8888999900001111'
         }
-        
     ]
     
     for client in clients:
@@ -128,11 +112,52 @@ def populate_clients():
             address=client['address'],
             phone=client['phone'],
             email=client['email'],
-            card_number=client['card_number']            
+            card_number=client['card_number']
         )
-        
+
+
+def populate_products():
+    products = [
+        {
+            'restaurant': 'La brasería de Adrián Sanz',
+            'name': 'T-bone steak',
+            'price': '25.99',
+            'description': 'Juicy grilled T-bone steak with seasoned fries'
+        },
+        {
+            'restaurant': 'La brasería de Adrián Sanz',
+            'name': 'Seafood Paella',
+            'price': '18.99',
+            'description': 'Traditional Spanish paella with a variety of fresh seafood'
+        },
+        {
+            'restaurant': 'Restaurante vegano de Pol Triquell',
+            'name': 'Vegan Burger',
+            'price': '12.99',
+            'description': 'Plant-based burger with vegan cheese and avocado'
+        },
+        {
+            'restaurant': 'Restaurante vegano de Pol Triquell',
+            'name': 'Quinoa Salad',
+            'price': '9.99',
+            'description': 'Healthy salad made with quinoa, mixed greens, and fresh vegetables'
+        }
+    ]
+
+    for product in products:
+        restaurant = Restaurant.objects.get(name=product['restaurant'])
+        Product.objects.create(
+            id_restaurant=restaurant,
+            name=product['name'],
+            price=product['price'],
+            description=product['description']
+        )
+
+
 if __name__ == '__main__':
     populate_restaurants()
     populate_users()
     populate_super_user()
     populate_clients()
+    populate_products()
+

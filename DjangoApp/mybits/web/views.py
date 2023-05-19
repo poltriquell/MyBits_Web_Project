@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from .models import *
 import json
 from django.core.exceptions import ValidationError
+from datetime import datetime
 
 
 
@@ -48,17 +49,38 @@ def client_detail(request, id_client):
 
     return render(request, 'html/reservation.html', {"reservation" : one_reservation})
 
+
+def order_detail(request, id_order):
+    order = get_object_or_404(Order, pk=id_order)
+    return render(request, 'html/order_detail.html', {'order': order})
+
+
+@login_required(login_url='login')
 def create_order(request):
     if request.method == 'POST':
-        description= request.POST.get('description')
-    
-        client_id = request.user.id
-        
-        order = Order()
+        user = request.user
+        client = Client.objects.get(username=user.username)  # Find the client by their username
 
-        return redirect('order_detail', order_id=order.id)
+        id_restaurant = request.POST.get('restaurant')  # Get the selected restaurant ID correctly
+        restaurant = get_object_or_404(Restaurant, pk=id_restaurant)  # Get the Restaurant instance based on the foreign key
+
+        order = Order(date=datetime.now(), id_client=client, id_restaurant=restaurant)
+        order.save()
+
+        # Get the selected products from the form
+        selected_products = request.POST.getlist('products')
+
+        for product_id in selected_products:
+            product = get_object_or_404(Product, pk=product_id)
+            quantity = request.POST.get(f'quantity_{product_id}')
+            order_item = OrderItem(order=order, id_producto=product, quantity=quantity)
+            order_item.save()
+
+        # Redirect the user to the order detail page
+        return redirect('order_detail', id_order=order.id_order)
     else:
-        return render(request, 'html/create_order.html')
+        return render(request, 'html/order.html', {"restaurants": Restaurant.objects.all()})
+
 
 
 @login_required(login_url='login')
@@ -91,7 +113,6 @@ def booking_restaurant(request):
 
 
     
-
 @login_required(login_url='login')
 def delete_booking(request, id_reservation):
     
@@ -134,8 +155,6 @@ def update_booking(request, id_reservation):
 @login_required(login_url='login')
 def user_bookings(request):
     
-    
-    
     user = request.user
     client = Client.objects.get(username=user.username)  # Obtén el cliente basado en el nombre de usuario
     if client.username != user.username:
@@ -144,6 +163,8 @@ def user_bookings(request):
     bookings = Reservation.objects.filter(id_client=client)
 
     return render(request, 'html/user_bookings.html', {"bookings": bookings})
+
+
 
     
     
@@ -157,9 +178,8 @@ def order_list(request):
     all_orders = Order.objects.all()
     return render(request, 'html/orders_list.html', {"orders" : all_orders})
 
-def order_detail(request, id_order):
-    one_order = Order.objects.get(pk=id_order)
-    return render(request, 'html/order_info.html', {"order" : one_order})
+
+
 
 def restaurant_list(request):
     restaurants = Restaurant.objects.all() # obtiene todos los restaurantes de la base de datos

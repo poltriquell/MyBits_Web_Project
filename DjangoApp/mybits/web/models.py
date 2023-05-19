@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Restaurant(models.Model):
     name = models.CharField(max_length=50)
     id_restaurant = models.AutoField(primary_key=True)
@@ -38,10 +36,23 @@ class Reservation(models.Model):
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     
+class Product(models.Model):
+    id_producto = models.AutoField(primary_key=True)
+    id_restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    name=models.CharField(max_length=50)
+    price=models.CharField(max_length=50)
+    description=models.CharField(max_length=50)
+
 
 class Order(models.Model):
     id_order = models.AutoField(primary_key=True)
+    date = models.DateTimeField()
     id_client = models.ForeignKey(Client, on_delete=models.CASCADE)
     id_restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
-    cantidad = models.IntegerField(default=1)
 
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    id_order = models.AutoField(primary_key=True)
+    id_producto = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)  # Hacer el campo nullable si es necesario
+    quantity = models.IntegerField()

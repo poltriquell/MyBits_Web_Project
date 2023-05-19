@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Detail</title>
+</head>
+<body>
+    <h1>Order Detail</h1>
+    <h2>Order ID: {{ order.id_order }}</h2>
+    <p>Date: {{ order.date }}</p>
+    <p>Client: {{ order.id_client.name }}</p>
+    <p>Restaurant: {{ order.id_restaurant.name }}</p>
+    <h3>Order Items:</h3>
+    <ul>
+        {% for order_item in order.orderitem_set.all %}
+        <li>{{ order_item.id_producto.name }} - Quantity: {{ order_item.quantity }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

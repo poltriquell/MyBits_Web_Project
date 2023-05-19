@@ -37,7 +37,13 @@ urlpatterns = [
 
 
     path('order/', wb.order_list, name='order-list'),
-    path('order/<int:id_order>/', wb.order_detail, name='order-detail'),
+    
+    
+    path('order/create/', wb.create_order, name='order_create'),
+
+    path('order/<int:id_order>/', wb.order_detail, name='order_detail'),
+
+    
 
 
     path('admin/', admin.site.urls),
@@ -45,7 +51,6 @@ urlpatterns = [
     path('about_us/', wb.about, name='about-us'),
     path('login/', wb.login_page, name='login'),
 
-    path('order/create/', wb.create_order, name='order_create'),
 
     path('book/create/', wb.booking_restaurant, name='book_create'),
 
