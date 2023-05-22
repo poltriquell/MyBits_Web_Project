@@ -44,7 +44,26 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 </div>
 
 <div class="separator"></div>
+{% if restaurant.ranking %}
+    <div id="selected-ranking">
+        <p>Tu valoración: {{ restaurant.ranking }} estrellas</p>
+    </div>
+{% endif %}
 
+
+<!-- Agrega el formulario de valoración -->
+<form method="POST">
+    {% csrf_token %}
+    <label for="ranking">Valoración:</label>
+    <select name="ranking" id="ranking">
+        <option value="1">1 estrella</option>
+        <option value="2">2 estrellas</option>
+        <option value="3">3 estrellas</option>
+        <option value="4">4 estrellas</option>
+        <option value="5">5 estrellas</option>
+    </select>
+    <button type="submit">Enviar</button>
+</form>
 <div id="map"></div>
 
 <script>
@@ -136,6 +155,8 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
         });
     });
 </script>
+
+
 </body>
 </html>
 {% endblock %}

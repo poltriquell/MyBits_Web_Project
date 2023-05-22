@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 from web.models import *
 
 
-
 def populate_restaurants():
     restaurantes = [
         {
@@ -19,7 +18,9 @@ def populate_restaurants():
             'email': 'reservar@braseria.blv',
             'website': 'www.braseriasanz.com',
             'longitude': 41.6897,
-            'latitude': 0.178438
+            'latitude': 0.178438,
+         
+
         },
         {
             'name': 'Restaurante vegano de Pol Triquell',
@@ -27,10 +28,10 @@ def populate_restaurants():
             'email': 'reservas@veganotriquell.lbb',
             'website': 'www.restaurantepol.lbb',
             'longitude': 41.5203322,
-            'latitude': 0.8684098
+            'latitude': 0.8684098,
+       
+
         },
-        
-        
     ]
     
     for restaurante in restaurantes:
@@ -40,9 +41,10 @@ def populate_restaurants():
             email=restaurante['email'],
             website=restaurante['website'],
             longitude=restaurante['longitude'],
-            latitude=restaurante['latitude']
-        )
+            latitude=restaurante['latitude'],
+            ranking=restaurante['ranking'],
 
+        )
 
 def populate_users():
     users = [

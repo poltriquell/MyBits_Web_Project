@@ -22,12 +22,20 @@ def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
     return render(request, 'html/restaurants.html', {"restaurants" : all_restaurants})
 
+
 def restaurant_detail(request, id_rest):
     one_restaurant = Restaurant.objects.get(pk=id_rest)
-    restaurant_dict = model_to_dict(one_restaurant)
-    context = {'restaurant': restaurant_dict}
-    return render(request, 'html/restaurant.html', context)
-
+    if request.method == 'POST':
+        ranking = request.POST.get('ranking')
+        one_restaurant.ranking = ranking
+        one_restaurant.save()
+        restaurant_dict = model_to_dict(one_restaurant)
+        context = {'restaurant': restaurant_dict}
+        return render(request, 'html/restaurant.html', context)
+    else:
+        restaurant_dict = model_to_dict(one_restaurant)
+        context = {'restaurant': restaurant_dict}
+        return render(request, 'html/restaurant.html', context)
 
 
 @login_required(login_url='login')
