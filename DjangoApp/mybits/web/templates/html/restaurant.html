@@ -43,6 +43,15 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
     <p>Página web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
 </div>
 
+
+<div vocab="https://schema.org/" typeof="Place">
+    <h2>What is the latitude and longitude of <span itemprop="name">{{ restaurant.name }}</span>?</h2>
+    <div property="geo" typeof="GeoCoordinates">
+      <meta property="latitude"> Latitude: {{ restaurant.latitude }} <meta/> 
+      <meta property="longitude"> Longitude: {{ restaurant.longitude }} <meta/>
+    </div>
+  </div>
+
 <div class="separator"></div>
 {% if restaurant.ranking %}
     <div id="selected-ranking">
