@@ -1,171 +1,159 @@
-<html lang="en">
+<html lang="en" xmlns:itemscope="http://www.w3.org/1999/xhtml" xmlns:itemtype="http://schema.org">
 
 {% extends './base.html' %}
+{% block title %} MyBits - {{ restaurant.name }}{% endblock %} 
 
 {% block content %}
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{restaurant.name}}</title>
-<script src="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.umd.js"></script>
-<link href="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.css" rel="stylesheet" />
-<link rel="stylesheet" href="../../static/css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.name }}</title>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.umd.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/latest/maptiler-sdk.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../static/css/style.css">
 
-<!-- Vendor CSS Files -->
-<!-- Boostrap Css -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Vendor CSS Files -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-<!-- Remix Icons -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-<!-- Style Css -->
-<link rel="stylesheet" href="../../static/css/style.css">
-<link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-<style>
-  body {margin: 0; padding: 0;}
-  #map { position: relative; height:900px; width: 100%; 
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <style>
+        body {margin: 0; padding: 0;}
+        #map { position: relative; height:900px; width: 100%; 
 
-  .restaurant-info { margin-top: 20px; }
-  .separator { border-top: 1px solid #ccc; margin: 20px 0; }
-</style>
+        .restaurant-info { margin-top: 20px; }
+        .separator { border-top: 1px solid #ccc; margin: 20px 0; }
+    </style>
 </head>
 <body>
-<div class="restaurant-info">
-    <h1>{{ restaurant.name }}</h1>
-    <p>Teléfono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p>
-    <p>Correo electrónico: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
-    <p>Página web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
-</div>
 
-
-<div vocab="https://schema.org/" typeof="Place">
-    <h2>What is the latitude and longitude of <span itemprop="name">{{ restaurant.name }}</span>?</h2>
-    <div property="geo" typeof="GeoCoordinates">
-      <meta property="latitude"> Latitude: {{ restaurant.latitude }} <meta/> 
-      <meta property="longitude"> Longitude: {{ restaurant.longitude }} <meta/>
+    <div itemscope itemtype="http://schema.org/Place">
+        <h2>What is the latitude and longitude of <span itemprop="name">{{ restaurant.name }}</span>?</h2>
+        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+            <meta itemprop="latitude" content="{{ restaurant.latitude }}">
+            <meta itemprop="longitude" content="{{ restaurant.longitude }}">
+            Latitude: {{ restaurant.latitude }} - Longitude: {{ restaurant.longitude }}
+        </div>
     </div>
-  </div>
 
-<div class="separator"></div>
-{% if restaurant.ranking %}
-    <div id="selected-ranking">
-        <p>Tu valoración: {{ restaurant.ranking }} estrellas</p>
+
+    <div class="separator"></div>
+    {% if restaurant.ranking %}
+        <div id="selected-ranking">
+            <p>Tu valoración: {{ restaurant.ranking }} estrellas</p>
+        </div>
+    {% endif %}
+
+    <!-- Agrega el formulario de valoración -->
+    <form method="POST">
+        {% csrf_token %}
+        <label for="ranking">Valoración:</label>
+        <select name="ranking" id="ranking">
+            <option value="1">1 estrella</option>
+            <option value="2">2 estrellas</option>
+            <option value="3">3 estrellas</option>
+            <option value="4">4 estrellas</option>
+            <option value="5">5 estrellas</option>
+        </select>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div class="restaurant-info" itemscope itemtype="http://schema.org/Restaurant">
+        <h1 itemprop="name">{{ restaurant.name }}</h1>
+        <p>Tel:<span itemprop="telephone">{{restaurant.phone}}</span></p>
+        <p>Correo electrónico: <span itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
+        <p>Página web:<span itemprop="url"> <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
+        {% if restaurant.ranking %}
+            <p>Rating:<span itemprop="ratingValue">{{restaurant.ranking}}</span></p>
+        {% endif %}
     </div>
-{% endif %}
 
+    <div id="map"></div>   
+    <script>
+        var longitude = {{restaurant.longitude}}
+        var latitude = {{restaurant.latitude}}
+        maptilersdk.config.apiKey = '0QBDko4qhpzabIA4ZV39';
+        var map = new maptilersdk.Map({
+            container: 'map',
+            style: maptilersdk.MapStyle.STREETS,
+            geolocate: maptilersdk.GeolocationType.POINT,
+            terrain:true,
+            showUserLocation:true
+        });
 
-<!-- Agrega el formulario de valoración -->
-<form method="POST">
-    {% csrf_token %}
-    <label for="ranking">Valoración:</label>
-    <select name="ranking" id="ranking">
-        <option value="1">1 estrella</option>
-        <option value="2">2 estrellas</option>
-        <option value="3">3 estrellas</option>
-        <option value="4">4 estrellas</option>
-        <option value="5">5 estrellas</option>
-    </select>
-    <button type="submit">Enviar</button>
-</form>
-<div id="map"></div>
-
-<script>
-    var longitude = {{restaurant.longitude}}
-    var latitude = {{restaurant.latitude}}
-    maptilersdk.config.apiKey = '0QBDko4qhpzabIA4ZV39';
-    var map = new maptilersdk.Map({
-        container: 'map',
-        style: maptilersdk.MapStyle.STREETS,
-        geolocate: maptilersdk.GeolocationType.POINT,
-        terrain:true,
-        showUserLocation:true
-
-    });
-
-    map.on('load', function () {
-        map.loadImage(
-            'https://docs.maptiler.com/sdk-js/assets/custom_marker.png',
-            // Add an image to use as a custom marker
-            function (error, image) {
-                if (error) throw error;
-                map.addImage('custom-marker', image);
-                map.scrollZoom.disable();
-                map.boxZoom.disable();
-                map.addControl(new maptilersdk.FullscreenControl({container: document.querySelector('body')}));
-                
-    
-                map.addSource('places', {
-                    'type': 'geojson',
-                    'data': {
-                        'type': 'FeatureCollection',
-                        'features': [
-                            {
-                                'type': 'Feature',
-                                'properties': {
-                                    'description':
-                                    '<strong>{{ restaurant.name }}</strong><p>Telefono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p><p>Email: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p><p>Web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p><p>Dirección: {{ restaurant.latitude }}, {{ restaurant.longitude }}</p>'
-                                },
-                                'geometry': {
-                                    'type': 'Point',
-                                    'coordinates': [latitude, longitude]
+        map.on('load', function () {
+            map.loadImage(
+                'https://docs.maptiler.com/sdk-js/assets/custom_marker.png',
+                // Add an image to use as a custom marker
+                function (error, image) {
+                    if (error) throw error;
+                    map.addImage('custom-marker', image);
+                    map.scrollZoom.disable();
+                    map.boxZoom.disable();
+                    map.addControl(new maptilersdk.FullscreenControl({container: document.querySelector('body')}));
+                    
+                    map.addSource('places', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': [
+                                {
+                                    'type': 'Feature',
+                                    'properties': {
+                                        'description':
+                                        '<strong>{{ restaurant.name }}</strong><p>{{ restaurant.address }}</p>',
+                                        'icon': 'custom-marker'
+                                    },
+                                    'geometry': {
+                                        'type': 'Point',
+                                        'coordinates': [longitude, latitude]
+                                    }
                                 }
-                            },
-                            
-                        ]
-                    }
-                });
-
-                // Add a layer showing the places.
-                map.addLayer({
-                    'id': 'places',
-                    'type': 'symbol',
-                    'source': 'places',
-                    'layout': {
-                        'icon-image': 'custom-marker',
-                        'icon-overlap': 'always'
-                    }
-                });
-            }
-        );
-
-        // Create a popup, but don't add it to the map yet.
-        var popup = new maptilersdk.Popup({
-            closeButton: false,
-            closeOnClick: false
+                            ]
+                        }
+                    });
+                    map.addLayer({
+                        'id': 'places',
+                        'type': 'symbol',
+                        'source': 'places',
+                        'layout': {
+                            'icon-image': '{icon}-15',
+                            'icon-allow-overlap': true
+                        }
+                    });
+                    map.on('click', 'places', function (e) {
+                        var coordinates = e.features[0].geometry.coordinates.slice();
+                        var description = e.features[0].properties.description;
+                        new maptilersdk.Popup()
+                            .setLngLat(coordinates)
+                            .setHTML(description)
+                            .addTo(map);
+                    });
+                    map.on('mouseenter', 'places', function () {
+                        map.getCanvas().style.cursor = 'pointer';
+                    });
+                    map.on('mouseleave', 'places', function () {
+                        map.getCanvas().style.cursor = '';
+                    });
+                }
+            );
         });
+    </script>
 
-        map.on('mouseenter', 'places', function (e) {
-            // Change the cursor style as a UI indicator.
-            map.getCanvas().style.cursor = 'pointer';
-
-            var coordinates = e.features[0].geometry.coordinates.slice();
-            var description = e.features[0].properties.description;
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            // Populate the popup and set its coordinates
-            // based on the feature found.
-            popup.setLngLat(coordinates).setHTML(description).addTo(map);
-        });
-
-        map.on('mouseleave', 'places', function () {
-            map.getCanvas().style.cursor = '';
-        });
-    });
-</script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-0Y9dIVTS5f8TiJl2DxRvCmw3a3k7ZPEcYXzt13S2tF6iQ8Ak7VxQnKthRrBrXSkI"
+        crossorigin="anonymous"></script>
 </body>
 </html>
-{% endblock %}
+{% endblock %} 
