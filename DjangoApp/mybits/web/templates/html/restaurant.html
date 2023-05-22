@@ -37,15 +37,14 @@
     </style>
 </head>
 <body>
-
-    <div itemscope itemtype="http://schema.org/Place">
-        <h2>What is the latitude and longitude of <span itemprop="name">{{ restaurant.name }}</span>?</h2>
-        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-            <meta itemprop="latitude" content="{{ restaurant.latitude }}">
-            <meta itemprop="longitude" content="{{ restaurant.longitude }}">
-            Latitude: {{ restaurant.latitude }} - Longitude: {{ restaurant.longitude }}
-        </div>
-    </div>
+    <script>
+        (async function() {
+            var longitude = {{ restaurant.longitude }};
+            var latitude = {{ restaurant.latitude }};
+            const address = await maptilersdk.geocoding.reverse([longitude, latitude]);
+            document.querySelector('#address').innerText = address;
+        })();
+    </script>
 
 
     <div class="separator"></div>
@@ -71,13 +70,24 @@
 
     <div class="restaurant-info" itemscope itemtype="http://schema.org/Restaurant">
         <h1 itemprop="name">{{ restaurant.name }}</h1>
-        <p>Tel:<span itemprop="telephone">{{restaurant.phone}}</span></p>
+        <p>Tel:<span itemprop="telephone">{{ restaurant.phone }}</span></p>
         <p>Correo electrónico: <span itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
         <p>Página web:<span itemprop="url"> <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
         {% if restaurant.ranking %}
-            <p>Rating:<span itemprop="ratingValue">{{restaurant.ranking}}</span></p>
+            <p>Rating:<span itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
         {% endif %}
+        <p>Location: <span itemprop="Location" id="address"></span></p>
     </div>
+
+    <div itemscope itemtype="http://schema.org/Place">
+        <span itemprop="name">{{ restaurant.name }}</span>
+        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+            <span itemprop="latitude" content="{{ restaurant.latitude }}">
+            <span itemprop="longitude" content="{{ restaurant.longitude }}">
+            Latitude: {{ restaurant.latitude }} - Longitude: {{ restaurant.longitude }}
+        </div>
+    </div>
+
 
     <div id="map"></div>   
     <script>
@@ -91,6 +101,8 @@
             terrain:true,
             showUserLocation:true
         });
+
+        
 
         map.on('load', function () {
             map.loadImage(
@@ -146,6 +158,7 @@
                     map.on('mouseleave', 'places', function () {
                         map.getCanvas().style.cursor = '';
                     });
+                    
                 }
             );
         });
