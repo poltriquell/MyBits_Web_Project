@@ -38,7 +38,7 @@
 </head>
 <body>
 
-    <div vocab="http://schema.org/" typeof="Restaurant">
+    <span vocab="http://schema.org/" typeof="Restaurant">
         <h1 property="name" itemprop="name">{{ restaurant.name }}</h1>
         <p>Tel: <span property="telephone" itemprop="telephone">{{ restaurant.phone }}</span></p>
         <p>Correo electrónico: <span property="email" itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></span></p>
@@ -64,7 +64,7 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
+    </span>
 
     
       <!-- Agrega el formulario de valoración -->
