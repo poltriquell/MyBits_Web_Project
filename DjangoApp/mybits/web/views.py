@@ -15,8 +15,6 @@ from datetime import datetime
 
 
 
-
-
 #Restaurants
 def restaurant_list(request):
     all_restaurants = Restaurant.objects.all()
