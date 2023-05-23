@@ -47,15 +47,30 @@
     </script>
 
 
-    <div class="separator"></div>
-    {% if restaurant.ranking %}
-        <div id="selected-ranking">
-            <p>Tu valoración: {{ restaurant.ranking }} estrellas</p>
-        </div>
-    {% endif %}
+   
 
-    <!-- Agrega el formulario de valoración -->
-    <form method="POST">
+ 
+    <div class="restaurant-info" itemscope itemtype="http://schema.org/Restaurant">
+        <h1 itemprop="name">{{ restaurant.name }}</h1>
+        <p>Tel:<span itemprop="telephone">{{ restaurant.phone }}</span></p>
+        <p>Correo electrónico: <span itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
+        <p>Página web:<span itemprop="url"> <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
+        {% if restaurant.ranking %}
+            <p>Rating:<span itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
+        {% endif %}
+    </div>
+
+    <div itemscope itemtype="http://schema.org/Place">
+        <span itemprop="name" content="{{ restaurant.name }}">
+        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+            <span itemprop="latitude" content="{{ restaurant.latitude }}">
+            <span itemprop="longitude" content="{{ restaurant.longitude }}">
+        </div>
+    </div>
+
+    
+      <!-- Agrega el formulario de valoración -->
+      <form method="POST">
         {% csrf_token %}
         <label for="ranking">Valoración:</label>
         <select name="ranking" id="ranking">
@@ -68,28 +83,8 @@
         <button type="submit">Enviar</button>
     </form>
 
-    <div class="restaurant-info" itemscope itemtype="http://schema.org/Restaurant">
-        <h1 itemprop="name">{{ restaurant.name }}</h1>
-        <p>Tel:<span itemprop="telephone">{{ restaurant.phone }}</span></p>
-        <p>Correo electrónico: <span itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
-        <p>Página web:<span itemprop="url"> <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
-        {% if restaurant.ranking %}
-            <p>Rating:<span itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
-        {% endif %}
-        <p>Location: <span itemprop="Location" id="address"></span></p>
-    </div>
 
-    <div itemscope itemtype="http://schema.org/Place">
-        <span itemprop="name">{{ restaurant.name }}</span>
-        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-            <span itemprop="latitude" content="{{ restaurant.latitude }}">
-            <span itemprop="longitude" content="{{ restaurant.longitude }}">
-            Latitude: {{ restaurant.latitude }} - Longitude: {{ restaurant.longitude }}
-        </div>
-    </div>
-
-
-    <div id="map"></div>   
+    <div id="map"></div>
     <script>
         var longitude = {{restaurant.longitude}}
         var latitude = {{restaurant.latitude}}
@@ -100,10 +95,9 @@
             geolocate: maptilersdk.GeolocationType.POINT,
             terrain:true,
             showUserLocation:true
+    
         });
-
-        
-
+    
         map.on('load', function () {
             map.loadImage(
                 'https://docs.maptiler.com/sdk-js/assets/custom_marker.png',
@@ -115,6 +109,7 @@
                     map.boxZoom.disable();
                     map.addControl(new maptilersdk.FullscreenControl({container: document.querySelector('body')}));
                     
+        
                     map.addSource('places', {
                         'type': 'geojson',
                         'data': {
@@ -124,49 +119,61 @@
                                     'type': 'Feature',
                                     'properties': {
                                         'description':
-                                        '<strong>{{ restaurant.name }}</strong><p>{{ restaurant.address }}</p>',
-                                        'icon': 'custom-marker'
+                                        '<strong>{{ restaurant.name }}</strong><p>Telefono: <a href="tel:{{ restaurant.phone }}">{{ restaurant.phone }}</a></p><p>Email: <a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p><p>Web: <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p><p>Dirección: {{ restaurant.latitude }}, {{ restaurant.longitude }}</p>'
                                     },
                                     'geometry': {
                                         'type': 'Point',
-                                        'coordinates': [longitude, latitude]
+                                        'coordinates': [latitude, longitude]
                                     }
-                                }
+                                },
+                                
                             ]
                         }
                     });
+    
+                    // Add a layer showing the places.
                     map.addLayer({
                         'id': 'places',
                         'type': 'symbol',
                         'source': 'places',
                         'layout': {
-                            'icon-image': '{icon}-15',
-                            'icon-allow-overlap': true
+                            'icon-image': 'custom-marker',
+                            'icon-overlap': 'always'
                         }
                     });
-                    map.on('click', 'places', function (e) {
-                        var coordinates = e.features[0].geometry.coordinates.slice();
-                        var description = e.features[0].properties.description;
-                        new maptilersdk.Popup()
-                            .setLngLat(coordinates)
-                            .setHTML(description)
-                            .addTo(map);
-                    });
-                    map.on('mouseenter', 'places', function () {
-                        map.getCanvas().style.cursor = 'pointer';
-                    });
-                    map.on('mouseleave', 'places', function () {
-                        map.getCanvas().style.cursor = '';
-                    });
-                    
                 }
             );
+    
+            // Create a popup, but don't add it to the map yet.
+            var popup = new maptilersdk.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+    
+            map.on('mouseenter', 'places', function (e) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+    
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+    
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+    
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(coordinates).setHTML(description).addTo(map);
+            });
+    
+            map.on('mouseleave', 'places', function () {
+                map.getCanvas().style.cursor = '';
+            });
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-0Y9dIVTS5f8TiJl2DxRvCmw3a3k7ZPEcYXzt13S2tF6iQ8Ak7VxQnKthRrBrXSkI"
-        crossorigin="anonymous"></script>
 </body>
 </html>
 {% endblock %} 
