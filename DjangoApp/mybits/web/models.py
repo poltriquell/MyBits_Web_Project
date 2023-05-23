@@ -9,6 +9,7 @@ class Restaurant(models.Model):
     longitude = models.FloatField(max_length=50)  # Define tu valor predeterminado aquí
     latitude = models.FloatField(max_length=50)  # Define tu valor predeterminado aquí
     ranking = models.FloatField(max_length=50,null=True)  # Define tu valor predeterminado aquí
+    
 
     
 class Client(models.Model):

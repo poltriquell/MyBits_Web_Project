@@ -23,19 +23,24 @@ def restaurant_list(request):
     return render(request, 'html/restaurants.html', {"restaurants" : all_restaurants})
 
 
+
 def restaurant_detail(request, id_rest):
-    one_restaurant = Restaurant.objects.get(pk=id_rest)
+    restaurant = get_object_or_404(Restaurant, id_restaurant=id_rest)
+    products = restaurant.product_set.all()
+
     if request.method == 'POST':
         ranking = request.POST.get('ranking')
-        one_restaurant.ranking = ranking
-        one_restaurant.save()
-        restaurant_dict = model_to_dict(one_restaurant)
-        context = {'restaurant': restaurant_dict}
-        return render(request, 'html/restaurant.html', context)
-    else:
-        restaurant_dict = model_to_dict(one_restaurant)
-        context = {'restaurant': restaurant_dict}
-        return render(request, 'html/restaurant.html', context)
+        # Actualizar el ranking del restaurante según la selección del usuario
+        restaurant.ranking = ranking
+        restaurant.save()
+
+    context = {
+        'restaurant': restaurant,
+        'products': products
+    }
+
+    return render(request, 'html/restaurant.html', context)
+
 
 
 @login_required(login_url='login')

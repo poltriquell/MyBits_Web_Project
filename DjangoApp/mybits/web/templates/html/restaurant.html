@@ -37,34 +37,32 @@
     </style>
 </head>
 <body>
-    <script>
-        (async function() {
-            var longitude = {{ restaurant.longitude }};
-            var latitude = {{ restaurant.latitude }};
-            const address = await maptilersdk.geocoding.reverse([longitude, latitude]);
-            document.querySelector('#address').innerText = address;
-        })();
-    </script>
 
-
-   
-
- 
-    <div class="restaurant-info" itemscope itemtype="http://schema.org/Restaurant">
-        <h1 itemprop="name">{{ restaurant.name }}</h1>
-        <p>Tel:<span itemprop="telephone">{{ restaurant.phone }}</span></p>
-        <p>Correo electrónico: <span itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></p>
-        <p>Página web:<span itemprop="url"> <a href="{{ restaurant.website }}">{{ restaurant.website }}</a></p>
+    <div vocab="http://schema.org/" typeof="Restaurant">
+        <h1 property="name" itemprop="name">{{ restaurant.name }}</h1>
+        <p>Tel: <span property="telephone" itemprop="telephone">{{ restaurant.phone }}</span></p>
+        <p>Correo electrónico: <span property="email" itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></span></p>
+        <p>Página web: <span property="url" itemprop="url"><a href="{{ restaurant.website }}">{{ restaurant.website }}</a></span></p>
         {% if restaurant.ranking %}
-            <p>Rating:<span itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
+            <div property="aggregateRating" typeof="AggregateRating">
+                <p>Rating: <span property="ratingValue" itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
+            </div>
         {% endif %}
-    </div>
-
-    <div itemscope itemtype="http://schema.org/Place">
-        <span itemprop="name" content="{{ restaurant.name }}">
-        <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-            <span itemprop="latitude" content="{{ restaurant.latitude }}">
-            <span itemprop="longitude" content="{{ restaurant.longitude }}">
+        <div property="geo" typeof="GeoCoordinates">
+            <span property="latitude" content="{{ restaurant.latitude }}" itemprop="latitude"></span>
+            <span property="longitude" content="{{ restaurant.longitude }}" itemprop="longitude"></span>
+        </div>
+        <div property="hasMenu" typeof="Menu">
+            <h2>Menú</h2>
+            {% for product in products %}
+                <div property="hasMenuItem" typeof="MenuItem">
+                    <h3 property="name" itemprop="name">{{ product.name }}</h3>
+                    <p property="description" itemprop="description">{{ product.description }}</p>
+                    <p property="offers" typeof="Offer" itemscope="" itemtype="http://schema.org/Offer">
+                        Precio: <span property="price" itemprop="price">{{ product.price }}</span>
+                    </p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
