@@ -39,41 +39,30 @@
 <body>
 
    <span vocab="http://schema.org/" typeof="Restaurant">
-        <h1 property="name" itemprop="name">La brasería de Adrián Sanz</h1>
-        <p>Tel: <span property="telephone" itemprop="telephone">600000000</span></p>
-        <p>Correo electrónico: <span property="email" itemprop="email"><a href="mailto:reservar@braseria.blv">reservar@braseria.blv</a></span></p>
-        <p>Página web: <span property="url" itemprop="url"><a href="www.braseriasanz.com">www.braseriasanz.com</a></span></p>
-        
+        <h1 property="name" itemprop="name">{{ restaurant.name }}</h1>
+        <p>Tel: <span property="telephone" itemprop="telephone">{{ restaurant.phone }}</span></p>
+        <p>Correo electrónico: <span property="email" itemprop="email"><a href="mailto:{{ restaurant.email }}">{{ restaurant.email }}</a></span></p>
+        <p>Página web: <span property="url" itemprop="url"><a href="{{ restaurant.website }}">{{ restaurant.website }}</a></span></p>
+        {% if restaurant.ranking %}
             <div property="aggregateRating" typeof="AggregateRating">
-    <p>Rating: <span property="ratingValue" itemprop="ratingValue">4.0</span></p>
-    <span property="ratingCount">100</span>
-    <span property="reviewCount">50</span>
-</div>
-
-        
+                <p>Rating: <span property="ratingValue" itemprop="ratingValue">{{ restaurant.ranking }}</span></p>
+            </div>
+        {% endif %}
         <div property="geo" typeof="GeoCoordinates">
-            <span property="latitude" content="0.178438" itemprop="latitude"></span>
-            <span property="longitude" content="41.6897" itemprop="longitude"></span>
+            <span property="latitude" content="{{ restaurant.latitude }}" itemprop="latitude"></span>
+            <span property="longitude" content="{{ restaurant.longitude }}" itemprop="longitude"></span>
         </div>
         <div property="hasMenu" typeof="Menu">
             <h2>Menú</h2>
-            
+            {% for product in products %}
                 <div property="hasMenuItem" typeof="MenuItem">
-                    <h3 property="name" itemprop="name">T-bone steak</h3>
-                    <p property="description" itemprop="description">Juicy grilled T-bone steak with seasoned fries</p>
+                    <h3 property="name" itemprop="name">{{ product.name }}</h3>
+                    <p property="description" itemprop="description">{{ product.description }}</p>
                     <p property="offers" typeof="Offer" itemscope="" itemtype="http://schema.org/Offer">
-                        Precio: <span property="price" itemprop="price">25.99</span>
+                        Precio: <span property="price" itemprop="price">{{ product.price }}</span>
                     </p>
                 </div>
-            
-                <div property="hasMenuItem" typeof="MenuItem">
-                    <h3 property="name" itemprop="name">Seafood Paella</h3>
-                    <p property="description" itemprop="description">Traditional Spanish paella with a variety of fresh seafood</p>
-                    <p property="offers" typeof="Offer" itemscope="" itemtype="http://schema.org/Offer">
-                        Precio: <span property="price" itemprop="price">18.99</span>
-                    </p>
-                </div>
-            
+            {% endfor %}
         </div>
     </span>
 
